@@ -53,8 +53,8 @@ Support Android 4.1 (API 16) and iOS 7.0+.
  #### issue
 
  * Android Studio continues to get a Unsupported major.minor version 52.0
-  * Check your SDK location in Android Studio:
-  * File->Project Structure->SDK Location
-  * Set JDK location: /Applications/Android Studio.app/Contents/jre/jdk/Contents/Home
+   * Check your SDK location in Android Studio:
+   * File->Project Structure->SDK Location
+   * Set JDK location: /Applications/Android Studio.app/Contents/jre/jdk/Contents/Home
 
 
