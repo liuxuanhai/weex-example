@@ -2,12 +2,6 @@
 
 A framework for building Mobile cross-platform UI.
 
-Android[![Download](https://api.bintray.com/packages/alibabaweex/maven/weex_sdk/images/download.svg)](https://bintray.com/alibabaweex/maven/weex_sdk/_latestVersion)
-iOS[![Pod version](https://badge.fury.io/co/WeexSDK.svg)](https://cocoapods.org/pods/WeexSDK)
-HTML5[![npm version](https://badge.fury.io/js/weex-html5.svg)](https://www.npmjs.com/package/weex-html5)
-
-[![CircleCI](https://circleci.com/gh/alibaba/weex/tree/dev.svg?style=svg&circle-token=b83b047a3a01f6ec26458a455530a5ddc261925f)](https://circleci.com/gh/alibaba/weex/tree/dev)
-
 Support Android 4.1 (API 16) and iOS 7.0+.
 
 ## 第0步：安装Node.js
@@ -61,20 +55,4 @@ On Android Platform , Weex code is executed in [weex_v8core](https://github.com/
 
 * Visit http://127.0.0.1:12580/ or http://[your local ip]:12580/ in Safari
 
-## Scripts
-
-See [SCRIPTS.md](./SCRIPTS.md) for more information.
-
-## IDE Plugin & Syntax Highlight & DevTool
-
-Weex team have developed a [DevTool](https://github.com/weexteam/weex-devtool) to help you to improve `we file` debug efficiency.
-
-See more stuff on [this wiki page](https://github.com/alibaba/weex/wiki/Weex-Community)
-
-### Weex Community
-
-* [StackOverflow](http://stackoverflow.com/questions/tagged/weex): Ask questions about Weex.
-* [SegmentFault (cn)](https://segmentfault.com/t/weex): 中文交流与讨论
-* [FAQ](https://weex.apache.org/faq.html)
-* [Articles (cn)](https://github.com/weexteam/article/issues): Weex 相关文章集合
 
