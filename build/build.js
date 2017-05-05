@@ -80,6 +80,12 @@ function build (name) {
     return runRollupOnWatch(config)
   }
   else {
+      
+    var destPath = path.resolve(__dirname, '..'); //current folder
+    var srcPath = absolute('node_modules/weex-html5/dist'); //Any destination folder
+    console.log(`\n => copy srcPath to destPath ${srcPath} (${destPath})\n`)
+    copyFolderRecursiveSync(srcPath, destPath)
+      
     console.log(`\n => start to build ${name} (${pkgName})\n`)
     return new Promise((resolve, reject) => {
       runRollup(config).then(() => {
@@ -89,9 +95,14 @@ function build (name) {
       })
     })
   }
+
+}
+function absolute (str) {
+    return path.resolve(__dirname, '..', str)
 }
 
 function zip (filePath, callback) {
+    console.log(`\n => start to filePath ${filePath} (${filePath})\n`)
   const read = fs.createReadStream(filePath)
   const write = fs.createWriteStream(filePath + '.gz')
   read.pipe(gzip).pipe(write).on('close', () => {
@@ -103,6 +114,43 @@ function zip (filePath, callback) {
 function now () {
   const time = Date.now() - (new Date()).getTimezoneOffset() * 60000
   return (new Date(time)).toISOString().replace('T', ' ').substring(0, 16)
+}
+
+function copyFileSync( source, target ) {
+    
+    var targetFile = target;
+    
+    //if target is a directory a new file with the same name will be created
+    if ( fs.existsSync( target ) ) {
+        if ( fs.lstatSync( target ).isDirectory() ) {
+            targetFile = path.join( target, path.basename( source ) );
+        }
+    }
+    
+    fs.writeFileSync(targetFile, fs.readFileSync(source));
+}
+
+function copyFolderRecursiveSync( source, target ) {
+    var files = [];
+    
+    //check if folder needs to be created or integrated
+    var targetFolder = path.join( target, path.basename( source ) );
+    if ( !fs.existsSync( targetFolder ) ) {
+        fs.mkdirSync( targetFolder );
+    }
+    
+    //copy
+    if ( fs.lstatSync( source ).isDirectory() ) {
+        files = fs.readdirSync( source );
+        files.forEach( function ( file ) {
+                      var curSource = path.join( source, file );
+                      if ( fs.lstatSync( curSource ).isDirectory() ) {
+                      copyFolderRecursiveSync( curSource, targetFolder );
+                      } else {
+                      copyFileSync( curSource, targetFolder );
+                      }
+                      } );
+    }
 }
 
 function report (filePath) {
