@@ -23,23 +23,9 @@ Support Android 4.1 (API 16) and iOS 7.0+.
     * `npm install`, install project
     * `./start`
     
-### Android
+### HTML5
 
-* Prerequisites
-  * Install [Android Environment](http://developer.android.com/training/basics/firstapp/index.html)
-* Run playground, In Android Studio
-    * Open `android/playground`
-    * In `app/java/com.alibaba.weex/IndexActivity`, modify `CURRENT_IP` to your local IP
-    * Click <img src="http://gtms04.alicdn.com/tps/i4/TB1wCcqMpXXXXakXpXX3G7tGXXX-34-44.png" height="16" > (`Run` button)
-* [Add an example](./examples/README.md#add-an-example)
-
-#### issue
-
-* Android Studio continues to get a Unsupported major.minor version 52.0
-  * Check your SDK location in Android Studio:
-  * File->Project Structure->SDK Location
-  * Set JDK location: /Applications/Android Studio.app/Contents/jre/jdk/Contents/Home
-
+* Visit http://127.0.0.1:12580/ or http://[your local ip]:12580/ in Safari
 
 ### iOS
 
@@ -54,9 +40,21 @@ Support Android 4.1 (API 16) and iOS 7.0+.
     * If you want to run the demo on your device, don't need to modify `CURRENT_IP` manually. ~~In `DemoDefine.h`(you can search this file by Xcode default shortcut `cmd + shift + o`), modify `CURRENT_IP` to your local IP~~
 * [Add an example](./examples/README.md#add-an-example)
 
+### Android
 
-### HTML5
+* Prerequisites
+  * Install [Android Environment](http://developer.android.com/training/basics/firstapp/index.html)
+* Run playground, In Android Studio
+    * Open `android/playground`
+    * In `app/java/com.alibaba.weex/IndexActivity`, modify `CURRENT_IP` to your local IP
+    * Click <img src="http://gtms04.alicdn.com/tps/i4/TB1wCcqMpXXXXakXpXX3G7tGXXX-34-44.png" height="16" > (`Run` button)
+* [Add an example](./examples/README.md#add-an-example)
 
-* Visit http://127.0.0.1:12580/ or http://[your local ip]:12580/ in Safari
+ #### issue
+
+ * Android Studio continues to get a Unsupported major.minor version 52.0
+  * Check your SDK location in Android Studio:
+  * File->Project Structure->SDK Location
+  * Set JDK location: /Applications/Android Studio.app/Contents/jre/jdk/Contents/Home
 
 
