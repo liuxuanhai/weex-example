@@ -33,9 +33,13 @@ Support Android 4.1 (API 16) and iOS 7.0+.
     * Click <img src="http://gtms04.alicdn.com/tps/i4/TB1wCcqMpXXXXakXpXX3G7tGXXX-34-44.png" height="16" > (`Run` button)
 * [Add an example](./examples/README.md#add-an-example)
 
-#### Runtime
+#### issue
 
-On Android Platform , Weex code is executed in [weex_v8core](https://github.com/alibaba/weex_v8core) which is based on Google V8 JavaScript engine.
+* Android Studio continues to get a Unsupported major.minor version 52.0
+  * Check your SDK location in Android Studio:
+  * File->Project Structure->SDK Location
+  * Set JDK location: /Applications/Android Studio.app/Contents/jre/jdk/Contents/Home
+
 
 ### iOS
 
