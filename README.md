@@ -10,31 +10,29 @@ HTML5[![npm version](https://badge.fury.io/js/weex-html5.svg)](https://www.npmjs
 
 Support Android 4.1 (API 16) and iOS 7.0+.
 
-## For Windows
+## 第0步：安装Node.js
 
-Please ***INSTALL [Git for Windows](https://git-scm.com/download/win)*** and run all the following commands in git-bash.
+    * `sudo npm install -g n`, 安装n模块
+    * `n latest`, (如果要指定6.0+ `sudo n 6.*`)
 
-## Meet Weex
+## 第1步：安装weex-toolkit
 
-* Install [Weex Playground App](https://weex.apache.org/playground.html) to see examples we already written.
-* If you want to write a demo, install [weex-toolkit](https://www.npmjs.com/package/weex-toolkit) in [Node.js](http://nodejs.org/) 4.0+ and
-* Run `weex init` to generate & start a simple project in an empty folder.
-* Follow the instructions in the project README.
-* Enjoy it.
+* `npm install -g weex-toolkit`
 
-## Use Weex
+## 第2步：下载Weex源码
 
-* [Tutorial](http://weex.apache.org/guide/)
-* [Documents](http://weex.apache.org/references)
+* `git clone https://github.com/KalicyZhou/weex-example.git`
 
+## 第3步：运行Weex源码
+
+* Under project root
+    * `npm install`, install project
+    * `./start`
+    
 ### Android
 
 * Prerequisites
-  * Install [Node.js](http://nodejs.org/) 4.0+
-  * Under project root
-    * `npm install`, install project
-    * `./start`
-    * Install [Android Environment](http://developer.android.com/training/basics/firstapp/index.html)
+  * Install [Android Environment](http://developer.android.com/training/basics/firstapp/index.html)
 * Run playground, In Android Studio
     * Open `android/playground`
     * In `app/java/com.alibaba.weex/IndexActivity`, modify `CURRENT_IP` to your local IP
@@ -48,10 +46,6 @@ On Android Platform , Weex code is executed in [weex_v8core](https://github.com/
 ### iOS
 
 * Prerequisites
-  * Install [Node.js](http://nodejs.org/) 4.0+
-    * Under project root
-        * `npm install`, install project
-        * `./start`
     * Install [iOS Environment](https://developer.apple.com/library/ios/documentation/IDEs/Conceptual/AppStoreDistributionTutorial/Setup/Setup.html)
     * Install [CocoaPods](https://guides.cocoapods.org/using/getting-started.html)
 * Run playground
@@ -61,6 +55,11 @@ On Android Platform , Weex code is executed in [weex_v8core](https://github.com/
     * Click <img src="http://img1.tbcdn.cn/L1/461/1/5470b677a2f2eaaecf412cc55eeae062dbc275f9" height="16" > (`Run` button) or use default shortcut `cmd + r` in Xcode
     * If you want to run the demo on your device, don't need to modify `CURRENT_IP` manually. ~~In `DemoDefine.h`(you can search this file by Xcode default shortcut `cmd + shift + o`), modify `CURRENT_IP` to your local IP~~
 * [Add an example](./examples/README.md#add-an-example)
+
+
+### HTML5
+
+* Visit http://127.0.0.1:12580/ or http://[your local ip]:12580/ in Safari
 
 ## Scripts
 
@@ -79,6 +78,3 @@ See more stuff on [this wiki page](https://github.com/alibaba/weex/wiki/Weex-Com
 * [FAQ](https://weex.apache.org/faq.html)
 * [Articles (cn)](https://github.com/weexteam/article/issues): Weex 相关文章集合
 
-## Contributing
-
-See [Weex Contributing Guide](./CONTRIBUTING.md) for more information.
