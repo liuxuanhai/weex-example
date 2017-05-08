@@ -52,14 +52,14 @@ Support Android 4.1 (API 16) and iOS 7.0+.
 
  #### issue
  * 请不要使用sudo进行安装，关于npm 取消sudo进行全局模块的安装你可以使用下面的命令：
- ``` bash
-sudo chmod 777 /usr/local/lib/node_modules
-```
-```
-Error:permission denied.Please apply the write premission to the directory: "/Users/yourUserName"
-```
-   * 如果遇见了上诉问题，你可以运行 `sudo chmod 777 ~` or `mkdir ~/.xtoolkit&chmod 777 .xtoolkit` 来解决
+    ``` bash
+    sudo chmod 777 /usr/local/lib/node_modules
+    ```
+    
    * [消除mac下npm全局安装使用sudo命令](http://www.jackpu.com/xiao-chu-macxia-npmquan-ju-an-zhuang-shi-yong-sudoming-ling/)
+   
+ * Error:permission denied.Please apply the write premission to the directory: "/Users/yourUserName"
+   * 如果遇见了上诉问题，你可以运行 `sudo chmod 777 ~` or `mkdir ~/.xtoolkit&chmod 777 .xtoolkit` 来解决
 
  * Android Studio continues to get a Unsupported major.minor version 52.0
    * Check your SDK location in Android Studio:
