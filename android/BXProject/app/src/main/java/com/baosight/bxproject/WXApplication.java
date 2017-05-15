@@ -2,6 +2,7 @@ package com.baosight.bxproject;
 
 import android.app.Application;
 
+import com.alibaba.weex.commons.adapter.CustomURIAdapter;
 import com.alibaba.weex.commons.adapter.ImageAdapter;
 import com.alibaba.weex.commons.util.AppConfig;
 import com.alibaba.weex.extend.module.WXEventModule;
@@ -22,8 +23,9 @@ public class WXApplication extends Application {
     WXSDKEngine.addCustomOptions("appGroup", "WXApp");
     WXSDKEngine.initialize(this,
         new InitConfig.Builder()
-            .setImgAdapter(new ImageAdapter())
-            .build()
+                .setImgAdapter(new ImageAdapter())
+                .setURIAdapter(new CustomURIAdapter())
+                .build()
     );
 
     try {
