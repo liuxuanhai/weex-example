@@ -8,6 +8,8 @@
 # Created by Builder
 examples/build
 examples/web-entry
+official_doc/build
+official_doc/web-entry
 test/build
 weex_tmp
 coverage
