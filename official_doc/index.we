@@ -11,7 +11,7 @@
 <template>
   <div>
     <!-- <wxc-navbar></wxc-navbar> -->
-    <wxc-tabbar class="tabbar" tab-items={{tabItems}} selected-color={{selectColor}}}></wxc-tabbar>
+    <wxc-tabbar class="tabbar" tab-items={{tabItems}} selected-color={{selectColor}}></wxc-tabbar>
   </div>
 </template>
 

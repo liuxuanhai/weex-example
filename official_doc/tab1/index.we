@@ -1,5 +1,5 @@
 <template>
-  <wxc-navpage data-role="none" height={{navBarHeight}} background-color="#1C6BC8" title={{title}} title-color="white" left-item-color="white">
+  <wxc-navpage data-role="none" height={{navBarHeight}} background-color="#1C6BC8" title={{title}} title-color="white">
     <list class="list">
       <cell class="header">
         <div>
@@ -16,7 +16,7 @@
             </div>
             <div class="button">
               <image style="width:120;height:120;"
-              src="local://new.jpg"></image>
+              src="local://doc_new.jpg"></image>
               <text class="title">新建公文</text>
             </div>
             <div class="button">
@@ -133,6 +133,7 @@
 
  module.exports = {
   data: {
+      navBarHeight: 88,
     title: '首页',
     isLoaded: true,
     loadingDisplay: 'hide',

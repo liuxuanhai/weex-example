@@ -11,7 +11,7 @@
 		325C104E1EC443E0000101E6 /* doing.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 325C10481EC443E0000101E6 /* doing.jpg */; };
 		325C104F1EC443E0000101E6 /* done.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 325C10491EC443E0000101E6 /* done.jpg */; };
 		325C10501EC443E0000101E6 /* mine.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 325C104A1EC443E0000101E6 /* mine.jpg */; };
-		325C10511EC443E0000101E6 /* new.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 325C104B1EC443E0000101E6 /* new.jpg */; };
+		325C10511EC443E0000101E6 /* doc_new.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 325C104B1EC443E0000101E6 /* doc_new.jpg */; };
 		325C10521EC443E0000101E6 /* search.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 325C104C1EC443E0000101E6 /* search.jpg */; };
 		325C10531EC443E0000101E6 /* todo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 325C104D1EC443E0000101E6 /* todo.jpg */; };
 		32AF474F1EC1B1AA005B67A6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 32AF474E1EC1B1AA005B67A6 /* main.m */; };
@@ -37,7 +37,7 @@
 		325C10481EC443E0000101E6 /* doing.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = doing.jpg; sourceTree = "<group>"; };
 		325C10491EC443E0000101E6 /* done.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = done.jpg; sourceTree = "<group>"; };
 		325C104A1EC443E0000101E6 /* mine.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = mine.jpg; sourceTree = "<group>"; };
-		325C104B1EC443E0000101E6 /* new.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = new.jpg; sourceTree = "<group>"; };
+		325C104B1EC443E0000101E6 /* doc_new.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = doc_new.jpg; sourceTree = "<group>"; };
 		325C104C1EC443E0000101E6 /* search.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = search.jpg; sourceTree = "<group>"; };
 		325C104D1EC443E0000101E6 /* todo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = todo.jpg; sourceTree = "<group>"; };
 		32AF474A1EC1B1AA005B67A6 /* BXProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BXProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -88,7 +88,7 @@
 				325C10481EC443E0000101E6 /* doing.jpg */,
 				325C10491EC443E0000101E6 /* done.jpg */,
 				325C104A1EC443E0000101E6 /* mine.jpg */,
-				325C104B1EC443E0000101E6 /* new.jpg */,
+				325C104B1EC443E0000101E6 /* doc_new.jpg */,
 				325C104C1EC443E0000101E6 /* search.jpg */,
 				325C104D1EC443E0000101E6 /* todo.jpg */,
 				325C10461EC4423A000101E6 /* computer.jpg */,
@@ -279,7 +279,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				325C10511EC443E0000101E6 /* new.jpg in Resources */,
+				325C10511EC443E0000101E6 /* doc_new.jpg in Resources */,
 				32AF47861EC40680005B67A6 /* tab4.png in Resources */,
 				325C104F1EC443E0000101E6 /* done.jpg in Resources */,
 				325C10531EC443E0000101E6 /* todo.jpg in Resources */,
