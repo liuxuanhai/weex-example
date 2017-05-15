@@ -1,0 +1,200 @@
+<template>
+  <wxc-navpage data-role="none" height={{navBarHeight}} background-color="#1C6BC8" title={{title}} title-color="white" left-item-color="white">
+    <list class="list">
+      <cell class="header">
+        <div>
+          <image style="width:750;height:286;"
+          src="local://computer.jpg"></image>
+        </div>
+        
+        <div class="buttonslow">
+          <div class="buttons">
+            <div class="button">
+              <image style="width:120;height:120;"
+              src="local://todo.jpg"></image>
+              <text class="title">待办公文</text>
+            </div>
+            <div class="button">
+              <image style="width:120;height:120;"
+              src="local://new.jpg"></image>
+              <text class="title">新建公文</text>
+            </div>
+            <div class="button">
+              <image style="width:120;height:120;"
+              src="local://mine.jpg"></image>
+              <text class="title">我的公文</text>
+            </div>
+          </div>
+          <div class="buttons">
+            <div class="button">
+              <image style="width:120;height:120;"
+              src="local://doing.jpg"></image>
+              <text class="title">在办公文</text>
+            </div>
+            <div class="button">
+                      <image style="width:120;height:120;"
+            src="local://done.jpg"></image>
+            <text class="title">办结公文</text>
+            </div>
+            <div class="button">
+              <image style="width:120;height:120;"
+              src="local://search.jpg"></image>
+              <text class="title">文件查询</text>
+            </div>
+          </div>
+        </div>
+      </cell>
+      <cell class="row" repeat="item in items" id="item-{{$index}}">
+        <div class="item-content">
+          <div class="item-imgbox">
+            <img class="item-img" src="{{item.owner.avatar_url}}" alt="" />
+          </div>
+          <div style="position:relative">
+            <div>
+              <text class="item">Repo name: {{item.name}}</text>
+            </div>
+            <div>
+              <text class="item">Repo star: {{item.description}}</text>
+            </div>
+          </div>
+        </div>
+      </cell>
+      <loading onloading="loadingData" style="width: 750; padding: 30;" display="{{loadingDisplay}}">
+        <text class="text">{{loadingText}}</text>
+      </loading>
+    </list>
+  </wxc-navpage>
+</template>
+
+<style>
+.list{
+  background-color: #ffffff;
+  flex: 1;
+}
+.buttonslow {
+  padding: 10;
+  flex-direction: column;
+  width:750;
+  height: 370;
+  background-color: white
+}
+.buttons {
+  flex: 1;
+  flex-direction: row;
+  width:750;
+  background-color: white
+}
+.item-imgbox {
+  height: 58;
+  width: 58;
+  margin-right: 20;
+}
+.item-img {
+  width: 58;
+  height: 58;
+}
+.button {
+  flex: 1;
+  align-items: center;
+  background-color: white
+}
+.header {
+  height: 675;
+  background-color: #efefef;
+  border-bottom-color: #eeeeee;
+  border-bottom-width: 2;
+  border-bottom-style: solid;
+}
+.title {
+  text-align: center;
+  font-size:28;
+}
+.item-content {
+  flex-direction: row;
+  width: 710;
+  background-color: #ffffff;
+}
+.row {
+  padding: 20;
+  border-bottom-color: #eeeeee;
+  border-bottom-width: 2;
+  border-bottom-style: solid;
+}
+.img {
+  width: 70;
+  height: 70;
+}
+</style>
+
+<script>
+  require('weex-components');
+  var stream = require('@weex-module/stream') || {}
+  var SEARCH_URL = 'https://api.github.com/search/repositories?q=language:javascript&sort=stars&order=desc'
+
+ module.exports = {
+  data: {
+    title: '首页',
+    isLoaded: true,
+    loadingDisplay: 'hide',
+    loadingText: 'Loading...',
+    items:[]
+  },
+  created: function () {
+        this.$getConfig(function (config) {
+        var env = config.env;
+        if(env.platform == 'iOS'){
+          var scale = env.scale;
+          var deviceWidth = env.deviceWidth / scale;
+          this.navBarHeight = 64.0 * 750.0 / deviceWidth;
+        }
+      }.bind(this));
+    var url = SEARCH_URL + '&page=1'
+
+    this.renderData(url)
+  },
+  methods: {
+    renderData: function (url) {
+      var self = this
+
+      stream.fetch({
+        method: 'GET',
+        url: url,
+        type:'json'
+      }, function(res) {
+        self.loadingDisplay = 'hide'
+
+        try {
+          var results = res.data.items || []
+          
+          if (Array.isArray(results)) {
+            for(var i = 0; i < results.length; i++) {
+              self.items.push(results[i])
+            }
+          }
+
+          self.isLoaded = true
+        } catch(e) {}
+      },function(res){
+          
+      })
+    },
+    loadingData: function (e) {
+      var url = SEARCH_URL + '&page=' + this.page
+      var self = this
+      
+      
+      if (self.isLoaded === false) return 
+      
+      self.loadingDisplay = 'show'
+      
+      if (self.page <=10 ) {
+        self.renderData(url)
+        self.page++
+      } else {
+        self.loadingDisplay = 'hide'
+        self.loadingText = 'NO MORE!'
+      }
+    }
+  }
+}
+</script>
