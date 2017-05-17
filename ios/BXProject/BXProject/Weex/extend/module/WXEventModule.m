@@ -27,7 +27,7 @@ WX_EXPORT_METHOD(@selector(openURL:))
     }
     
     UIViewController *controller = [[BXWXViewController alloc] init];
-    ((BXWXViewController *)controller).url = [NSURL URLWithString:newURL];
+    ((BXWXViewController *)controller).sourceURL = [NSURL URLWithString:newURL];
     
     [[weexInstance.viewController navigationController] pushViewController:controller animated:YES];
 }

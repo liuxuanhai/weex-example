@@ -69,7 +69,7 @@
     [self addEdgePop];
     self.view.backgroundColor = [UIColor whiteColor];
     self.automaticallyAdjustsScrollViewInsets = NO;
-    [self _renderWithURL:_sourceURL];
+    [self _renderWithURL:[self sourceURL]];
     
     if ([self.navigationController isKindOfClass:[WXRootViewController class]]) {
         self.navigationController.navigationBarHidden = YES;

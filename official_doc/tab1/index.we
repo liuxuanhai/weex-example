@@ -9,7 +9,7 @@
         
         <div class="buttonslow">
           <div class="buttons">
-            <div class="button">
+            <div class="button" onclick="push">
               <image style="width:120;height:120;"
               src="local://todo.jpg"></image>
               <text class="title">待办公文</text>
@@ -128,16 +128,19 @@
 
 <script>
   require('weex-components');
+  var navigator = require('@weex-module/navigator');
   var stream = require('@weex-module/stream') || {}
   var SEARCH_URL = 'https://api.github.com/search/repositories?q=language:javascript&sort=stars&order=desc'
 
  module.exports = {
   data: {
-      navBarHeight: 88,
+      dir: 'official_doc',
+    navBarHeight: 88,
     title: '首页',
     isLoaded: true,
     loadingDisplay: 'hide',
     loadingText: 'Loading...',
+    baseURL: '',
     items:[]
   },
   created: function () {
@@ -152,8 +155,52 @@
     var url = SEARCH_URL + '&page=1'
 
     this.renderData(url)
+
+      var bundleUrl = this.$getConfig().bundleUrl;
+      bundleUrl = new String(bundleUrl);
+      console.log('hit', bundleUrl);
+      var nativeBase;
+      var isAndroidAssets = bundleUrl.indexOf('your_current_IP') >= 0 || bundleUrl.indexOf('file://assets/')>=0;
+
+      var isiOSAssets = bundleUrl.indexOf('file:///') >= 0 && bundleUrl.indexOf('WeexDemo.app') > 0;
+      if (isAndroidAssets) {
+        nativeBase = 'file://assets/';
+      }
+      else if (isiOSAssets) {
+        // file:///var/mobile/Containers/Bundle/Application/{id}/WeexDemo.app/
+        // file:///Users/{user}/Library/Developer/CoreSimulator/Devices/{id}/data/Containers/Bundle/Application/{id}/WeexDemo.app/
+        nativeBase = bundleUrl.substring(0, bundleUrl.lastIndexOf('/') + 1);
+      }
+      else {
+        var host = 'localhost:12580';
+        var matches = /\/\/([^\/]+?)\//.exec(this.$getConfig().bundleUrl);
+        if (matches && matches.length >= 2) {
+          host = matches[1];
+        }
+        nativeBase = 'http://' + host + '/' + this.dir + '/build/';
+      }
+      var h5Base = bundleUrl;
+      // in Native
+      var base = nativeBase;
+      if (typeof window == 'object') {
+        // in Browser or WebView
+        base = h5Base;
+      }
+      this.baseURL = base;
   },
   methods: {
+    push: function(e) {
+      console.log('hit push');
+        var vm = this;
+        var url = this.baseURL;
+        if (typeof window !== 'object') {
+          url = this.baseURL + 'tab2/tabbar-item.js?itemId=tab2';
+        }
+        var params = {'url':url}
+      console.log('push url', url);
+        navigator.push(params,function(e){
+        });
+    },
     renderData: function (url) {
       var self = this
 

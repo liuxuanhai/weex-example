@@ -7,15 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <SRWebSocket.h>
+#import "WXBaseViewController.h"
 
-@interface BXWXViewController : UIViewController<SRWebSocketDelegate>
+@interface BXWXViewController : WXBaseViewController
 
-@property (nonatomic, strong) NSString *script;
-@property (nonatomic, strong) NSURL *url;
-
-@property (nonatomic, strong) SRWebSocket *hotReloadSocket;
-@property (nonatomic, strong) NSString *source;
+@property (nonatomic, strong) NSURL *sourceURL;
 
 @end
 

@@ -55,8 +55,9 @@
 #ifdef UITEST
     url = [NSURL URLWithString:UITEST_HOME_URL];
 #endif
-    BXWXViewController *viewController = (BXWXViewController*)[[UIApplication sharedApplication] delegate].window.rootViewController;
-    [viewController setUrl:url];
+    UINavigationController* nav = (UINavigationController*)[[UIApplication sharedApplication] delegate].window.rootViewController;
+    BXWXViewController *viewController = (BXWXViewController*)nav.topViewController;
+    [viewController setSourceURL:url];
 }
 
 @end
