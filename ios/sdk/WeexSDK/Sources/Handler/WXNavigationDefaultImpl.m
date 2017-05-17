@@ -220,7 +220,14 @@
     }
     
     container.navigationItem.title = param[@"title"];
-    
+    NSString* titleColor = param[@"titleColor"];
+    if (titleColor.length > 0) {
+        //set title and title color
+        [container.navigationController.navigationBar setTitleTextAttributes:
+         @{ UITextAttributeTextColor: [WXConvert UIColor:titleColor]}];
+        
+        [container.navigationController.navigationBar setTintColor:[UIColor whiteColor]];
+    }
     [self callback:block code:MSG_SUCCESS data:nil];;
 }
 
@@ -235,7 +242,7 @@
 - (UIView *)barButton:(NSDictionary *)param position:(WXNavigationItemPosition)position
         withContainer:(UIViewController *)container
 {
-    if (param[@"title"]) {
+    if ([param[@"title"] length] > 0) {
         NSString *title = param[@"title"];
 
         NSDictionary *attribute = @{NSFontAttributeName: [UIFont systemFontOfSize:18]};

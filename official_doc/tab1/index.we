@@ -1,5 +1,5 @@
 <template>
-  <wxc-navpage data-role="none" height={{navBarHeight}} background-color="#1C6BC8" title={{title}} title-color="white">
+  <wxc-navpage data-role="navbar" height={{navBarHeight}} background-color="#1C6BC8" title={{title}} title-color="white">
     <list class="list">
       <cell class="header">
         <div>
