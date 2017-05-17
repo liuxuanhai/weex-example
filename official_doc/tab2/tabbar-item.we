@@ -1,34 +1,52 @@
 <template>
+  <wxc-navpage data-role="none" height={{navBarHeight}} background-color="#1C6BC8" title={{title}} title-color="white">
     <div class="wrapper">
+
+<switch  class="switch" checked="true" onclick='onclick' onchange='onchange' ondisappear='ondisappear' onappear='onappear'></switch>
         <text class="text" style="color:{{color}}">{{text}}</text>
     </div>
+  </wxc-navpage>
 </template>
 
 <style>
     .wrapper { 
-        width: 750; 
+        width: 750;
         position: absolute; 
         top: 0; 
         left: 0; 
         right: 0; 
-        bottom: 0;
-        align-items: center; 
-        justify-content: center;
+bottom: 0;
+align-items: center;
+justify-content: center;
     }
+.switch {
+width: 100
+}
     .text {
-        font-size:60; 
+        font-size:80;
         font-weight: bold; 
         font-family: "Open Sans", sans-serif;
     }
 </style>
 
 <script>
+  require('weex-components');
     module.exports = {
         data: {
             color: '#ff0000',
-            text: '',
+            text: '待办公文',
+            title: '待办公文',
+    navBarHeight: 88,
         },
         created: function() {
+        this.$getConfig(function (config) {
+        var env = config.env;
+        if(env.platform == 'iOS'){
+          var scale = env.scale;
+          var deviceWidth = env.deviceWidth / scale;
+          this.navBarHeight = 64.0 * 750.0 / deviceWidth;
+        }
+      }.bind(this));
             var bundleUrl = this.$getConfig().bundleUrl;
             nativeLog('bundleUrl = ' + bundleUrl);
 
