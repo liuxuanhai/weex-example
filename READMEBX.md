@@ -25,7 +25,7 @@ Support Android 4.1 (API 16) and iOS 7.0+.
     
 ### HTML5
 
-* Visit http://127.0.0.1:12580/ or http://[your local ip]:12580/ in Safari
+* Visit http://127.0.0.1:12580/bx_index.html or http://[your local ip]:12580/bx_index.html in Safari
 
 ### iOS
 
@@ -66,4 +66,64 @@ Support Android 4.1 (API 16) and iOS 7.0+.
      * `status {number}` 返回的状态码
      * `data {Object | string}` 返回的数据
 
+ * 示例
+ ``` weex
+ <template>
+  <wxc-navpage data-role="navbar" height={{navBarHeight}} background-color="#1C6BC8" title={{title}} title-color="white">
+    <div class="wrapper">
+        <text class="text" style="color:{{color}}">{{text}}</text>
+    </div>
+  </wxc-navpage>
+</template>
 
+<script>
+    require('weex-components');
+    var service = require('@weex-module/service') || {}
+    module.exports = {
+        data: {
+            text: '待办公文',
+            title: '待办公文',
+            navBarHeight: 88,
+        },
+
+        created: function() {
+            this.$getConfig(function (config) {
+                var env = config.env;
+                if(env.platform == 'iOS'){
+                    var scale = env.scale;
+                    var deviceWidth = env.deviceWidth / scale;
+                    this.navBarHeight = 64.0 * 750.0 / deviceWidth;
+                }
+            }.bind(this));
+            this.renderData()
+        },
+        methods: {
+            getHQTaskList: function(userName,userId) {
+                var json = {
+                    attr: {
+                        projectName: "BaogangIntlHQ",
+                        serviceName: "todolist", //   getSendTask
+                        methodName: "getHQTaskList"
+                    },
+                    data: {
+                        userName: userName,
+                        userId: userId,
+                        page: "1"
+                    }
+                }
+                return json;
+            },
+            renderData: function () {
+                var self = this
+                var json = self.getHQTaskList("徐志芳", "035330");
+                service.fetch(json, function(res) {
+                    try {
+                        var results = res.data || {}
+                        self.text = JSON.stringify(res);
+                    } catch(e) {}
+                })
+            }
+        }
+    }
+</script>
+```
