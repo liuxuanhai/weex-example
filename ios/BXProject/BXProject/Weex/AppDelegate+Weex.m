@@ -11,9 +11,10 @@
 #import "BXWXViewController.h"
 #import "WXImgLoaderDefaultImpl.h"
 #import "WXEventModule.h"
+#import "WXServiceModule.h"
 #import <WeexSDK/WeexSDK.h>
 
-@implementation AppDelegate (Weex)
+@implementation BXAppDelegate (Weex)
 
 #pragma mark weex
 + (void)load {
@@ -25,6 +26,7 @@
     
     [WXSDKEngine registerComponent:@"select" withClass:NSClassFromString(@"WXSelectComponent")];
     [WXSDKEngine registerModule:@"event" withClass:[WXEventModule class]];
+    [WXSDKEngine registerModule:@"service" withClass:[WXServiceModule class]];
     
 #if !(TARGET_IPHONE_SIMULATOR)
     [self checkUpdate];
@@ -56,8 +58,10 @@
     url = [NSURL URLWithString:UITEST_HOME_URL];
 #endif
     UINavigationController* nav = (UINavigationController*)[[UIApplication sharedApplication] delegate].window.rootViewController;
-    BXWXViewController *viewController = (BXWXViewController*)nav.topViewController;
-    [viewController setSourceURL:url];
+    if ([nav isKindOfClass:[UINavigationController class]]) {
+        BXWXViewController *viewController = (BXWXViewController*)nav.topViewController;
+        [viewController setSourceURL:url];
+    }
 }
 
 @end

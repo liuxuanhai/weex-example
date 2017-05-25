@@ -6,19 +6,22 @@
 //  Copyright © 2017年 Kalicy. All rights reserved.
 //
 
-#import "AppDelegate.h"
+#import "BXAppDelegate.h"
 #import "AppDelegate+Weex.h"
+#import "BXAppDelegate+BXPlatfrom.h"
+#import "AppConstants.h"
 
-@interface AppDelegate ()
+@interface BXAppDelegate ()
 
 @end
 
-@implementation AppDelegate
+@implementation BXAppDelegate
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
-    [self setupWeex];
+    [self initializeWithOptions:launchOptions];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setupWeex) name:BXAccountDidLoginSuccessNotification object:nil];
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
     return YES;
 }

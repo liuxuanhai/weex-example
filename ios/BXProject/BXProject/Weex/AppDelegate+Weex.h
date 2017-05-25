@@ -6,8 +6,8 @@
 //  Copyright © 2017年 Kalicy. All rights reserved.
 //
 
-#import "AppDelegate.h"
+#import "BXAppDelegate.h"
 
-@interface AppDelegate (Weex)
+@interface BXAppDelegate (Weex)
 - (void)setupWeex;
 @end

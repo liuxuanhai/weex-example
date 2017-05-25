@@ -14,8 +14,10 @@
 		325C10511EC443E0000101E6 /* doc_new.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 325C104B1EC443E0000101E6 /* doc_new.jpg */; };
 		325C10521EC443E0000101E6 /* search.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 325C104C1EC443E0000101E6 /* search.jpg */; };
 		325C10531EC443E0000101E6 /* todo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 325C104D1EC443E0000101E6 /* todo.jpg */; };
+		328679501ED3D73300B992AA /* BXAppDelegate+BXPlatfrom.m in Sources */ = {isa = PBXBuildFile; fileRef = 3286794F1ED3D73300B992AA /* BXAppDelegate+BXPlatfrom.m */; };
+		328679531ED5127D00B992AA /* WXServiceModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 328679521ED5127D00B992AA /* WXServiceModule.m */; };
 		32AF474F1EC1B1AA005B67A6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 32AF474E1EC1B1AA005B67A6 /* main.m */; };
-		32AF47521EC1B1AA005B67A6 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 32AF47511EC1B1AA005B67A6 /* AppDelegate.m */; };
+		32AF47521EC1B1AA005B67A6 /* BXAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 32AF47511EC1B1AA005B67A6 /* BXAppDelegate.m */; };
 		32AF47581EC1B1AA005B67A6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 32AF47561EC1B1AA005B67A6 /* Main.storyboard */; };
 		32AF475A1EC1B1AA005B67A6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 32AF47591EC1B1AA005B67A6 /* Assets.xcassets */; };
 		32AF475D1EC1B1AA005B67A6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 32AF475B1EC1B1AA005B67A6 /* LaunchScreen.storyboard */; };
@@ -40,10 +42,14 @@
 		325C104B1EC443E0000101E6 /* doc_new.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = doc_new.jpg; sourceTree = "<group>"; };
 		325C104C1EC443E0000101E6 /* search.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = search.jpg; sourceTree = "<group>"; };
 		325C104D1EC443E0000101E6 /* todo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = todo.jpg; sourceTree = "<group>"; };
+		3286794E1ED3D73300B992AA /* BXAppDelegate+BXPlatfrom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "BXAppDelegate+BXPlatfrom.h"; sourceTree = "<group>"; };
+		3286794F1ED3D73300B992AA /* BXAppDelegate+BXPlatfrom.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "BXAppDelegate+BXPlatfrom.m"; sourceTree = "<group>"; };
+		328679511ED5127D00B992AA /* WXServiceModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXServiceModule.h; sourceTree = "<group>"; };
+		328679521ED5127D00B992AA /* WXServiceModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXServiceModule.m; sourceTree = "<group>"; };
 		32AF474A1EC1B1AA005B67A6 /* BXProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BXProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		32AF474E1EC1B1AA005B67A6 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		32AF47501EC1B1AA005B67A6 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		32AF47511EC1B1AA005B67A6 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		32AF47501EC1B1AA005B67A6 /* BXAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BXAppDelegate.h; sourceTree = "<group>"; };
+		32AF47511EC1B1AA005B67A6 /* BXAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BXAppDelegate.m; sourceTree = "<group>"; };
 		32AF47571EC1B1AA005B67A6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		32AF47591EC1B1AA005B67A6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		32AF475C1EC1B1AA005B67A6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -96,6 +102,15 @@
 			path = tab1;
 			sourceTree = "<group>";
 		};
+		3286794D1ED3D73300B992AA /* BXMobileAPI */ = {
+			isa = PBXGroup;
+			children = (
+				3286794E1ED3D73300B992AA /* BXAppDelegate+BXPlatfrom.h */,
+				3286794F1ED3D73300B992AA /* BXAppDelegate+BXPlatfrom.m */,
+			);
+			path = BXMobileAPI;
+			sourceTree = "<group>";
+		};
 		32AF47411EC1B1AA005B67A6 = {
 			isa = PBXGroup;
 			children = (
@@ -118,9 +133,10 @@
 		32AF474C1EC1B1AA005B67A6 /* BXProject */ = {
 			isa = PBXGroup;
 			children = (
+				3286794D1ED3D73300B992AA /* BXMobileAPI */,
 				32AF47661EC2D7EE005B67A6 /* Weex */,
-				32AF47501EC1B1AA005B67A6 /* AppDelegate.h */,
-				32AF47511EC1B1AA005B67A6 /* AppDelegate.m */,
+				32AF47501EC1B1AA005B67A6 /* BXAppDelegate.h */,
+				32AF47511EC1B1AA005B67A6 /* BXAppDelegate.m */,
 				32AF47561EC1B1AA005B67A6 /* Main.storyboard */,
 				32AF47591EC1B1AA005B67A6 /* Assets.xcassets */,
 				32AF475B1EC1B1AA005B67A6 /* LaunchScreen.storyboard */,
@@ -184,6 +200,8 @@
 			children = (
 				32AF47791EC2EDE3005B67A6 /* WXEventModule.h */,
 				32AF477A1EC2EDE3005B67A6 /* WXEventModule.m */,
+				328679511ED5127D00B992AA /* WXServiceModule.h */,
+				328679521ED5127D00B992AA /* WXServiceModule.m */,
 			);
 			path = module;
 			sourceTree = "<group>";
@@ -226,12 +244,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 32AF47611EC1B1AA005B67A6 /* Build configuration list for PBXNativeTarget "BXProject" */;
 			buildPhases = (
-				A031CC06F72F74E122387CDA /* 📦 Check Pods Manifest.lock */,
+				A031CC06F72F74E122387CDA /* [CP] Check Pods Manifest.lock */,
 				32AF47461EC1B1AA005B67A6 /* Sources */,
 				32AF47471EC1B1AA005B67A6 /* Frameworks */,
 				32AF47481EC1B1AA005B67A6 /* Resources */,
-				5E91DDD094BD23AF2E718D22 /* 📦 Embed Pods Frameworks */,
-				E719C1B52E4729733A672F28 /* 📦 Copy Pods Resources */,
+				5E91DDD094BD23AF2E718D22 /* [CP] Embed Pods Frameworks */,
+				E719C1B52E4729733A672F28 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -299,14 +317,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		5E91DDD094BD23AF2E718D22 /* 📦 Embed Pods Frameworks */ = {
+		5E91DDD094BD23AF2E718D22 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Embed Pods Frameworks";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -314,29 +332,29 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BXProject/Pods-BXProject-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		A031CC06F72F74E122387CDA /* 📦 Check Pods Manifest.lock */ = {
+		A031CC06F72F74E122387CDA /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		E719C1B52E4729733A672F28 /* 📦 Copy Pods Resources */ = {
+		E719C1B52E4729733A672F28 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Copy Pods Resources";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -355,8 +373,10 @@
 				32AF47691EC2D956005B67A6 /* AppDelegate+Weex.m in Sources */,
 				32AF477B1EC2EDE3005B67A6 /* WXSelectComponent.m in Sources */,
 				32AF477C1EC2EDE3005B67A6 /* WXImgLoaderDefaultImpl.m in Sources */,
+				328679531ED5127D00B992AA /* WXServiceModule.m in Sources */,
 				32AF477D1EC2EDE3005B67A6 /* WXEventModule.m in Sources */,
-				32AF47521EC1B1AA005B67A6 /* AppDelegate.m in Sources */,
+				328679501ED3D73300B992AA /* BXAppDelegate+BXPlatfrom.m in Sources */,
+				32AF47521EC1B1AA005B67A6 /* BXAppDelegate.m in Sources */,
 				32AF474F1EC1B1AA005B67A6 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -470,7 +490,9 @@
 			baseConfigurationReference = 95595CD4004A8970B85F560B /* Pods-BXProject.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				BS_SERVER_IP = 202.101.47.84;
 				INFOPLIST_FILE = BXProject/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.abeyond.BXProject;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -482,7 +504,9 @@
 			baseConfigurationReference = 59409E25414E8686C889B1A2 /* Pods-BXProject.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				BS_SERVER_IP = 202.101.47.84;
 				INFOPLIST_FILE = BXProject/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.abeyond.BXProject;
 				PRODUCT_NAME = "$(TARGET_NAME)";

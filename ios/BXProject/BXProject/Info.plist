@@ -48,5 +48,30 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>iPlat4M_SourcePlatFormID</key>
+	<string>com.baosight.iplat4mipad</string>
+	<key>iPlat4M_SourcePlatFormName</key>
+	<string>com.baosight.iplat4mipad</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>$(PRODUCT_BUNDLE_IDETIFIER)</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>$(PRODUCT_BUNDLE_IDETIFIER)</string>
+			</array>
+		</dict>
+	</array>
+	<key>MbsHttpURLString</key>
+	<string>http://${BS_SERVER_IP}/iPlatMBS/AgentService</string>
+	<key>MbsHttpsURLString</key>
+	<string>http://${BS_SERVER_IP}/iPlatMBS/LoginService</string>
+	<key>PlatformDLURL</key>
+	<string>http://${BS_SERVER_IP}/iPlatMBS/appstore/release/${SERVER_BUNDLE_ID}/${SERVER_BUNDLE_ID}.plist</string>
+	<key>UpdateURLString</key>
+	<string>http://${BS_SERVER_IP}/iPlatMBS/appstore/release/${BUNDLE_ID}/${BUNDLE_ID}.plist</string>
 </dict>
 </plist>

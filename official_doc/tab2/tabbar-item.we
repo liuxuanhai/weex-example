@@ -23,45 +23,78 @@ justify-content: center;
 width: 100
 }
     .text {
-        font-size:80;
-        font-weight: bold; 
+        font-size:32;
         font-family: "Open Sans", sans-serif;
     }
 </style>
 
 <script>
   require('weex-components');
+
+   var service = require('@weex-module/service') || {}
     module.exports = {
         data: {
             color: '#ff0000',
             text: '待办公文',
-            title: '待办公文',
-    navBarHeight: 88,
+            title: '待办公文1',
+            navBarHeight: 88,
         },
-        created: function() {
-        this.$getConfig(function (config) {
-        var env = config.env;
-        if(env.platform == 'iOS'){
-          var scale = env.scale;
-          var deviceWidth = env.deviceWidth / scale;
-          this.navBarHeight = 64.0 * 750.0 / deviceWidth;
-        }
-      }.bind(this));
-            var bundleUrl = this.$getConfig().bundleUrl;
-            nativeLog('bundleUrl = ' + bundleUrl);
 
-            if (bundleUrl.indexOf("tab1") > 0){
-                this.color = '#ff0000';
-                this.text = 'This is Tab 1 Test.';
+        created: function() {
+          this.$getConfig(function (config) {
+            var env = config.env;
+            if(env.platform == 'iOS'){
+                var scale = env.scale;
+                var deviceWidth = env.deviceWidth / scale;
+                this.navBarHeight = 64.0 * 750.0 / deviceWidth;
             }
-            else if (bundleUrl.indexOf("tab2") > 0){
-                this.color = '#00ff00';
-                this.text = 'This is Tab 2 Test.';
-            } 
-            else if (bundleUrl.indexOf("tab3") > 0){
-                this.color = '#0000ff';
-                this.text = 'This is Tab 3 Test.';
-            } 
+          }.bind(this));
+
+          this.renderData()
+
+          var bundleUrl = this.$getConfig().bundleUrl;
+          nativeLog('bundleUrl = ' + bundleUrl);
+
+          if (bundleUrl.indexOf("tab1") > 0){
+            this.color = '#ff0000';
+            this.text = 'This is Tab 1 Test.';
+          }
+          else if (bundleUrl.indexOf("tab2") > 0){
+            this.color = '#222222';
+            this.text = 'This is Tab 2 Test.dgdsgfg';
+          }
+          else if (bundleUrl.indexOf("tab3") > 0){
+            this.color = '#0000ff';
+            this.text = 'This is Tab 3 Test.';
+          }
+        },
+        methods: {
+    getHQTaskList: function(userName,userId) {
+	  var json = {
+		attr: {
+		    projectName: "BaogangIntlHQ",
+		    serviceName: "todolist", //   getSendTask
+		    methodName: "getHQTaskList"
+		},
+		data: {
+		    userName: userName,
+		    userId: userId,
+		    page: "1"
+        }
+      }
+      return json;
+    },
+    renderData: function () {
+      var self = this
+      var json = self.getHQTaskList("徐志芳", "035330");
+console.log('get json', json);
+      service.fetch(json, function(res) {
+        try {
+            var results = res.data || {}
+            self.text = JSON.stringify(res);
+        } catch(e) {}
+      })
+    }
         }
     }
 </script>
