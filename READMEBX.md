@@ -1,4 +1,4 @@
-# Weex
+# Weex BXProject
 
 A framework for building Mobile cross-platform UI.
 
