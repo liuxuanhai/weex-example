@@ -6,10 +6,11 @@ android {
 
     defaultConfig {
         applicationId "com.baosight.bxproject"
-        minSdkVersion 15
+        minSdkVersion 16
         targetSdkVersion 23
-        versionCode 5
-        versionName "0.5.2.5"
+        versionCode 1
+        versionName "1.0"
+        multiDexEnabled true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         ndk{
             abiFilters "x86"
@@ -98,4 +99,5 @@ dependencies {
     compile 'com.journeyapps:zxing-android-embedded:3.4.0'
     // PLUGIN GRADLE EXTENSIONS START
     // PLUGIN GRADLE EXTENSIONS END
+    compile project(':BXMobileAPI')
 }

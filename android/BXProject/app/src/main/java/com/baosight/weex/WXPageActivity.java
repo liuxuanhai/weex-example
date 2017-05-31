@@ -1,4 +1,4 @@
-package com.baosight.bxproject;
+package com.baosight.weex;
 
 import android.app.ActivityManager;
 import android.app.AlertDialog;
@@ -26,6 +26,7 @@ import com.alibaba.weex.commons.util.CommonUtils;
 import com.alibaba.weex.commons.util.DevOptionHandler;
 import com.alibaba.weex.commons.util.ShakeDetector;
 import com.alibaba.weex.constants.Constants;
+import com.baosight.bxproject.R;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 import com.taobao.weex.WXEnvironment;
@@ -59,6 +60,10 @@ public class WXPageActivity extends AbsWeexActivity implements
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_wxpage);
+    initView();
+  }
+
+  protected void initView() {
     mContainer = (ViewGroup) findViewById(R.id.container);
     mProgressBar = (ProgressBar) findViewById(R.id.progress);
     mTipView = (TextView) findViewById(R.id.index_tip);

@@ -1,4 +1,4 @@
-package com.baosight.bxproject;
+package com.baosight.weex;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -11,6 +11,8 @@ import android.view.animation.AnimationSet;
 import android.view.animation.ScaleAnimation;
 
 import com.alibaba.weex.commons.util.AppConfig;
+import com.baosight.bxproject.BXMainActivity;
+import com.baosight.bxproject.R;
 
 public class SplashActivity extends AppCompatActivity {
 
@@ -34,25 +36,8 @@ public class SplashActivity extends AppCompatActivity {
 
       @Override
       public void onAnimationEnd(Animation animation) {
-        String url = AppConfig.getLaunchUrl();
-        if (!TextUtils.isEmpty(url)) {
-          Intent intent = new Intent(Intent.ACTION_VIEW);
-          String scheme = Uri.parse(url).getScheme();
-          StringBuilder builder = new StringBuilder();
-          if (TextUtils.equals("file", scheme)) {
-            intent.putExtra("isLocal", true);
-          } else if (!TextUtils.equals("http", scheme) && !TextUtils.equals("https", scheme)) {
-            builder.append("http:");
-          }
-          builder.append(url);
-
-          Uri uri = Uri.parse(builder.toString());
-          intent.setData(uri);
-          intent.addCategory("com.taobao.android.intent.category.WEEX");
-          intent.setPackage(getPackageName());
-          startActivity(intent);
-          finish();
-        }
+        startMainActivity();
+        finish();
       }
 
       @Override
@@ -61,4 +46,25 @@ public class SplashActivity extends AppCompatActivity {
     });
     textView.startAnimation(animationSet);
   }
+
+  private void startMainActivity() {
+    String url = AppConfig.getLaunchUrl();
+    if (!TextUtils.isEmpty(url)) {
+      Intent intent = new Intent(this, BXMainActivity.class);
+      String scheme = Uri.parse(url).getScheme();
+      StringBuilder builder = new StringBuilder();
+      if (TextUtils.equals("file", scheme)) {
+        intent.putExtra("isLocal", true);
+      } else if (!TextUtils.equals("http", scheme) && !TextUtils.equals("https", scheme)) {
+        builder.append("http:");
+      }
+      builder.append(url);
+
+      Uri uri = Uri.parse(builder.toString());
+      intent.setData(uri);
+      intent.setPackage(getPackageName());
+      startActivity(intent);
+    }
+  }
+
 }

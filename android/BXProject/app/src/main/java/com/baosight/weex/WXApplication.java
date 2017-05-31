@@ -1,4 +1,4 @@
-package com.baosight.bxproject;
+package com.baosight.weex;
 
 import android.app.Application;
 
