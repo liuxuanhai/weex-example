@@ -1,6 +1,8 @@
 package com.baosight.bxmobileapi.datamanager;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -42,6 +44,7 @@ public class BXDataManager {
     public StartUpHelper st;
     public boolean isMBSLoggedin = false;
     private Activity activity;
+    private AlertDialog EFAlert = null;
 
     public static BXDataManager getInstance() {
         synchronized (BXDataManager.class) {
@@ -70,7 +73,7 @@ public class BXDataManager {
         activity.getIntent().putExtra(KeyConstant.PACKAGE_NAME, activity.getPackageName());
         activity.getIntent().putExtra(KeyConstant.MBS_HTTPSURL,
                 StringUtil.getConfiguration(activity, R.string.LoginService));// LoginService
-        activity.getIntent().putExtra(KeyConstant.AGENT_TYPE,"debug");// LoginService
+        activity.getIntent().putExtra(KeyConstant.AGENT_TYPE,"anonymous");// LoginService
         if(isMBSLoggedin) {
             UserSession userSession = UserSession.getUserSession();
             Bundle bundle = new Bundle();
@@ -169,5 +172,22 @@ public class BXDataManager {
         map.put("globaldeviceid", deviceId);
         inInfo.getBlock(EiConstant.resultBlock).addRow(map);
         EiService.getBoundService().getAgent().callService(inInfo, this, "registerCallback");
+    }
+
+    public void registerCallback(EiInfo info) {
+        if(info.getStatus() == 1) {
+            this.EFAlert = (new AlertDialog.Builder(this.getActivity())).setTitle("绑定申请成功").setIcon(R.drawable.icon).setMessage(info.getMsg()).setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+                    BXDataManager.this.EFAlert.dismiss();
+                }
+            }).show();
+        } else {
+            this.EFAlert = (new AlertDialog.Builder(this.getActivity())).setTitle("绑定申请失败").setIcon(R.drawable.icon).setMessage(info.getMsg()).setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+                    BXDataManager.this.EFAlert.dismiss();
+                }
+            }).show();
+        }
+
     }
 }

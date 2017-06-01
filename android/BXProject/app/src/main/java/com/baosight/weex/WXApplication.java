@@ -12,6 +12,7 @@ import com.taobao.weex.InitConfig;
 import com.taobao.weex.WXEnvironment;
 import com.taobao.weex.WXSDKEngine;
 import com.taobao.weex.common.WXException;
+import com.baosight.weex.extend.module.WXServiceModule;
 
 public class WXApplication extends Application {
 
@@ -19,8 +20,8 @@ public class WXApplication extends Application {
   public void onCreate() {
     super.onCreate();
 //    initDebugEnvironment(true, false, "DEBUG_SERVER_HOST");
-    WXSDKEngine.addCustomOptions("appName", "WXSample");
-    WXSDKEngine.addCustomOptions("appGroup", "WXApp");
+//    WXSDKEngine.addCustomOptions("appName", "WXSample");
+//    WXSDKEngine.addCustomOptions("appGroup", "WXApp");
     WXSDKEngine.initialize(this,
         new InitConfig.Builder()
                 .setImgAdapter(new ImageAdapter())
@@ -30,6 +31,7 @@ public class WXApplication extends Application {
 
     try {
       WXSDKEngine.registerModule("event", WXEventModule.class);
+      WXSDKEngine.registerModule("service", WXServiceModule.class);
     } catch (WXException e) {
       e.printStackTrace();
     }
