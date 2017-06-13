@@ -59,6 +59,9 @@ Support Android 4.1 (API 16) and iOS 7.0+.
    
  * 用法：
    在`script`标签中通过一个`require`语句引入，即：`require('../components/bx-navbar.we');`
+   * `backitemsrc {string}`: navbar返回按钮的图标
+   * `backitemtitle {string}`: navbar返回按钮的标题
+   * `rightbuttons [array]`: navbar右侧按钮集合
  
  * 示例：
  ``` weex
