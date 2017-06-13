@@ -55,7 +55,7 @@ Support Android 4.1 (API 16) and iOS 7.0+.
 
  ### 自定义Component - `<bx-navbar>`
  * 概述：
-   <wxc-navpage>的扩展，为了实现navigation bar上两个right items
+   `<wxc-navpage>`的扩展，为了实现navigation bar上两个right items
    
  * 用法：
    在`script`标签中通过一个`require`语句引入，即：`require('../components/bx-navbar.we');`
