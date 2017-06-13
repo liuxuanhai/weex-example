@@ -53,7 +53,7 @@ Support Android 4.1 (API 16) and iOS 7.0+.
     * Click <img src="http://gtms04.alicdn.com/tps/i4/TB1wCcqMpXXXXakXpXX3G7tGXXX-34-44.png" height="16" > (`Run` button)
 * [Add an example](./examples/README.md#add-an-example)
 
- ### 自定义Component - bx-navbar
+ ### 自定义Component - `<bx-navbar>`
  * 概述：
    <wxc-navpage>的扩展，为了实现navigation bar上两个right items
    
