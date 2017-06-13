@@ -53,6 +53,61 @@ Support Android 4.1 (API 16) and iOS 7.0+.
     * Click <img src="http://gtms04.alicdn.com/tps/i4/TB1wCcqMpXXXXakXpXX3G7tGXXX-34-44.png" height="16" > (`Run` button)
 * [Add an example](./examples/README.md#add-an-example)
 
+ ### 自定义Component - <bx-navbar>
+ * 概述：
+   <wxc-navpage>的扩展，为了实现navigation bar上两个right items
+   
+ * 用法：
+   在`script`标签中通过一个`require`语句引入，即：`require('../components/bx-navbar.we');`
+ 
+ * 示例：
+ ``` weex
+ <template>
+    <div class="wrapper">
+        <bx-navbar height={{navBarHeight}} background-color="#1C6BC8" title={{title}} title-color="white" rightbuttons="{{rightBarButtons}}"></bx-navbar>
+        <div class="wrapper" style="margin-top:{{navBarHeight}}">
+            <text>{{text}}</text>
+        </div>
+    </div>
+</template>
+
+<style>
+    .wrapper { 
+  		position: absolute; 
+  		top: 0; 
+  		left: 0; 
+  		right: 0; 
+  		bottom: 0; 
+  		width: 750;
+    }
+</style>
+
+<script>
+require('../components/bx-navbar.we');
+    module.exports = {
+        data: {
+            text: 'hello',
+            navBarHeight: 88,
+            title:"首页",
+            rightBarButtons:[
+                {rightItemSrc:"local://bar_search.png"},
+                {rightItemSrc:"local://bar_new.png"}
+            ],
+        },
+        created: function() {
+          this.$getConfig(function (config) {
+            var env = config.env;
+            if(env.platform == 'iOS'){
+                var scale = env.scale;
+                var deviceWidth = env.deviceWidth / scale;
+                this.navBarHeight = 64.0 * 750.0 / deviceWidth;
+            }
+          }.bind(this));
+        }
+    }
+</script>
+```
+
  ### 自定义module - service
  * 概述：
     用于实现中间件网络请求。
