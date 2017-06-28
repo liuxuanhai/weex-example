@@ -4,7 +4,7 @@ A framework for building Mobile cross-platform UI.
 
 Support Android 4.1 (API 16) and iOS 7.0+.
 
-## 第0步：安装Node.js
+## 第0步：升级Node.js
 
 * `sudo npm install -g n`, 安装n模块
 * `n latest`, (如果要指定6.0+ `sudo n 6.*`)
