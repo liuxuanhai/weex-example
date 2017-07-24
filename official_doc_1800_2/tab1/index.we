@@ -1,0 +1,339 @@
+<template>
+  <wxc-navpage data-role="navbar" height={{navBarHeight}} background-color="#3CB0FC" title={{title}} title-color="white" left-item-title="退出" left-item-color="white"  >
+    <list class="list" onviewappear="{{viewappear}}">
+      <refresh style="width: 750; padding: 30;align-items: center;" onrefresh="refreshData" display="{{refreshDisplay}}">
+        <text class="text">{{refreshText}}</text>
+        <loading-indicator class="indicator"></loading-indicator>
+      </refresh>
+      <cell class="header">
+        <div>
+          <image style="width:750;height:224;" src="local://banner.jpg"></image>
+        </div>
+        <div class="buttonslow">
+          <div class="buttons">
+            <div class="button" onclick="push(0)">
+              <image style="width:120;height:120;" src="local://todo.jpg"></image>
+              <text class="title" style="font-size:{{fontTitle}}">待办公文</text>
+            </div>
+            <div class="button" onclick="push(4)">
+              <image style="width:120;height:120;" src="local://doc_new.jpg"></image>
+              <text class="title" style="font-size:{{fontTitle}}">新建公文</text>
+            </div>
+            <div class="button" onclick="push(1)">
+              <image style="width:120;height:120;" src="local://mine.jpg"></image>
+              <text class="title" style="font-size:{{fontTitle}}">我的公文</text>
+            </div>
+          </div>
+          <div class="buttons">
+             <div class="button" onclick="push(2)">
+              <image style="width:120;height:120;" src="local://doing.jpg"></image>
+              <text class="title" style="font-size:{{fontTitle}}">在办公文</text>
+            </div>
+            <div class="button" onclick="push(3)">
+              <image style="width:120;height:120;" src="local://done.jpg"></image>
+              <text class="title" style="font-size:{{fontTitle}}">办结公文</text>
+            </div>
+            <div class="button" onclick="push(5)">
+              <image style="width:120;height:120;" src="local://search.jpg"></image>
+              <text class="title" style="font-size:{{fontTitle}}">文件查询</text>
+            </div>
+          </div>
+        </div>
+      </cell>
+      <cell onclick="oncellclick" repeat="item in items" id="item-{{$index}}">
+        <div class="cellStyle" style="border-bottom-color:{{indicatorColor}};">
+          <div class="leftArea">
+            <image style="width:50;height:50;margin-left:25"  src="local://todo_list_icon.png"></image>
+          </div>
+          <div class="centerArea">
+            <text style="font-size:{{fontTitle}}; color:#282828;margin-left:10;margin-right:10;">{{item.title}}</text>
+            <div style="flex-direction:row;margin-top:20">
+              <text style="margin-left:10;font-size:{{fontSmallTitle}};color:{{greyTextColor}}">{{item.createUser}}</text>
+              <text style="margin-left:20;font-size:{{fontSmallTitle}};color:{{greyTextColor}}">{{item.fileID}}</text>
+            </div>
+          </div>
+          <div>
+            <text style="font-size:{{fontDate}};color:{{greyTextColor}}">{{item.createDate}}</text>
+          </div>
+        </div>
+      </cell>
+      <loading onloading="loadingData" style="width: 750; padding: 10;background-color:#F7F8F7;align-items: center;" if="{{isLoading}}" display="{{loadingDisplay}}">
+        <text class="text">更多 ···</text>
+      </loading>
+    </list>
+    <bx-loading top=400 if="{{loading}}"></bx-loading>
+  </wxc-navpage>
+</template>
+
+<style>
+  .text{
+    color:#939393;
+    font-size:24;
+  }
+  .list{
+    background-color: #ffffff;
+    flex: 1;
+  }
+  .buttonslow {
+    padding: 10;
+    flex-direction: column;
+    width:750;
+    height: 365;
+    background-color: white
+  }
+  .buttons {
+    flex: 1;
+    flex-direction: row;
+    width:750;
+    background-color: white
+  }
+  .button {
+    flex: 1;
+    align-items: center;
+    background-color: white
+  }
+  .header {
+    height: 616;
+    background-color: #efefef;
+    border-bottom-color: #eeeeee;
+    border-bottom-width: 2;
+    border-bottom-style: solid;
+  }
+  .title {
+    text-align: center;
+    color:#000000;
+  }
+  .cellStyle{
+    flex-direction:row;
+    border-bottom-style:solid;
+    border-bottom-width:1px;
+    padding-top:30;
+    padding-bottom:30;
+    padding-right:20;
+  }
+  .leftArea{
+    flex:1;
+  }
+
+  .centerArea{
+    flex:7;
+    margin-left:10;
+  }
+
+  .img {
+    width: 70;
+    height: 70;
+  }
+</style>
+
+<script>
+  require('../components/bx-loading.we');
+  require('weex-components');
+  var navigator = require('@weex-module/navigator');
+  var getBaseURL = require('../include/base-url.js').getBaseURL;
+  var tools = require('../include/tools.js').methods;
+  var styles = require('../include/styles.js').methods;
+  var modal = require('@weex-module/modal') || {};
+  var storage = require('@weex-module/storage');
+  var getPlatform = require('../include/tools.js').methods.getPlatform;
+
+ module.exports = {
+  data: {
+    dir: 'official_doc',
+    navBarHeight: 88,
+    title: '首页',
+    isLoaded: true,
+    isLoading: false,
+    refreshText:'↓ 下拉刷新',
+    baseURL: '',
+    loading: true,
+    loadingDisplay: 'hide',
+    refreshDisplay: 'hide',
+    page: 1,
+    items:[],
+    userName: '',
+    userId: '',
+    fontTitle: null,
+    fontSmallTitle: null,
+    fontDate: null,
+    greyTextColor: '',
+    indicatorColor: ''
+  },
+  created: function () {
+    
+    var self = this;
+    //iOS配置
+    tools.setNavBarHeight(this);
+
+    //获取公共样式
+    self.fontTitle = styles.getFontC();
+    self.fontSmallTitle = styles.getFontD();
+    self.fontDate = styles.getFontE();
+    self.greyTextColor = styles.getColorA();
+    self.indicatorColor = styles.getColorB();
+
+    storage.getItem('todolist_cache', function(e) {
+      var result = e.result;
+      var data = e.data;
+      if (result === 'success') {
+        var res = JSON.parse(data);
+        self.updateData(res,false);
+      } 
+      self.page = 1;
+      /*获取用户信息*/
+      weex.requireModule('user').getUserInfo(function(info){
+        console.log('获取登陆信息并存储' ,info);
+        
+        self.userName = info.attr.parameter_username;
+        self.userId = info.attr.parameter_userid;
+
+        //数据加载
+        self.renderData();
+
+      });
+      // self.renderData()
+    });
+
+    self.baseURL = getBaseURL(this);
+
+     this.$on('naviBar.leftItem.click',function(e){
+        
+          var photo = require('@weex-module/connect');
+          photo.exitApp(function(e){
+            
+          });
+        
+      
+    });
+  },
+  methods: {
+    push: function(index,e) {
+      // console.log('hit push');
+      var vm = this;
+      var url = this.baseURL;
+      if (typeof window !== 'object') {
+        switch(index) {
+          case 4:
+            url = this.baseURL + 'new-doc/new-doc.js'; 
+            storage.setItem('new-doc-dif', '1', function (e) {
+            }); 
+            break;
+          case 5:
+            url = this.baseURL + 'search-doc/query.js'; break;
+          case 0:
+            url = this.baseURL + 'todo-doc/index.js?index='+index;
+            storage.setItem('todo-list-dif', '1', function (e) {
+            });
+            break;
+          default:
+            url = this.baseURL + 'todo-doc/index.js?index='+index;
+        }
+      }
+      var params = {'url':url}
+      console.log('push url', url);
+      navigator.push(params,function(e){
+      });
+    },
+    getHQTaskList: function(userName,userId,page) {
+	    var json = {
+		  attr: {
+		    projectName: "1800OAProject",
+		    serviceName: "getToDoDoc", //   getSendTask
+		    methodName: "getTaskList"
+		  },
+		  data: {
+		    userName: userName,
+		    userId: userId,
+		    page: page
+        }
+      }
+      return json;
+    },
+    oncellclick: function(e) {
+      //显示点击列表项位置
+      var vm = this;
+      var url = this.baseURL;
+      if (typeof window !== 'object') {
+        var docId = this.items[this.$index].documentKey;
+        url = this.baseURL + 'todo-doc/to-do-detail.js?docId='+docId;
+      }
+      var params = {'url':url};
+      navigator.push(params,function(e){
+      });
+    },
+    updateData: function (res, save) {
+      var self = this
+      self.refreshText='↓ 下拉刷新';
+      self.loadingDisplay = 'hide';
+      self.loading = false;
+      self.isLoading = true;
+      try {
+        if (res.status == -1) {
+          modal.toast({
+            'message': '链接服务器超时，请稍候再试', 
+            'duration': 2
+          });
+          self.isLoading = false;
+          return;
+        }
+
+        var docs = res.data.docs || []
+        if (docs.length == 0) {
+          modal.toast({
+            'message': '没有更多数据了', 
+            'duration': 2
+          });
+          self.isLoading = false;
+          return;
+        }
+
+        console.log('get docs', res.data.docs);
+        if (Array.isArray(docs)) {
+          if (self.page == 1) {
+            storage.setItem('todolist_cache', JSON.stringify(res), function(e) {
+              });
+            self.items = [];
+          }
+          for(var i = 0; i < docs.length; i++) {
+            self.items.push(docs[i])
+          }
+        }
+        if (self.items.length == res.data.totalCount)  {
+          self.isLoading = false;
+        }
+        self.page++
+        self.isLoaded = true
+      } catch(e) {}
+    },
+    renderData: function () {
+      var self = this
+      var json = self.getHQTaskList(self.userName, self.userId, this.page.toString());
+      var service = require('@weex-module/service') || {};
+      service.fetch(json, function(res) {
+        self.updateData(res, true);
+      })
+    },
+    loadingData: function (e) {
+      var self = this
+      if (self.isLoaded === false) return 
+      self.loadingDisplay = 'show'
+      self.renderData()
+    },
+    refreshData: function (e) {
+      if (this.isLoaded === false) return 
+      
+      this.refreshText='↑ 释放更新';
+      this.refreshDisplay = 'show'
+      this.loading = true
+      this.page = 1
+      this.renderData()
+      this.refreshDisplay = 'hide'
+    },
+    viewappear:function(){
+        console.log("---ceshi");
+        storage.removeItem('person-list', function (e) {
+        })
+      }
+  }
+}
+</script>

@@ -1,0 +1,55 @@
+<template>
+    <div class="wrapper">
+       <web id="webview" src="{{src}}" class="webStyle"  onpagefinish="finishload"></web>  
+       <bx-loading top=200 if="{{loading}}"></bx-loading>
+    </div>
+</template>
+
+<style>
+    .wrapper { 
+        width: 750; 
+        position: absolute; 
+        top: 0; 
+        left: 0; 
+        right: 0; 
+        bottom: 0;
+        align-items: center; 
+        justify-content: center;
+    }
+      .webStyle {
+        position: absolute; 
+        top: 0; 
+        left: 0; 
+        right: 0; 
+        bottom: 0;
+  }
+</style>
+
+<script>
+  require('../components/bx-loading.we');
+var web_module = require('@weex-module/webview')
+    module.exports = {
+        data: {
+            loading: true,
+            src : "https://github.com/KalicyZhou/weex-example/blob/master/READMEBX.md",
+        },
+        created: function() {
+          this.$getConfig(function (config) {
+            var env = config.env;
+            if(env.platform == 'iOS'){
+                var scale = env.scale;
+                var deviceWidth = env.deviceWidth / scale;
+                this.navBarHeight = 64.0 * 750.0 / deviceWidth;
+            }
+            else {
+                this.loading = false;
+            }
+          }.bind(this));
+        },
+        methods: {
+            finishload: function(e) {
+                this.loading = false;
+            }
+        }
+    }
+</script>

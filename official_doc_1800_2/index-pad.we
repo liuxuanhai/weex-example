@@ -1,0 +1,396 @@
+<template>
+<div class="wrapper">
+    	  <wxc-navbar data-role="navbar" height={{navBarHeight}} background-color="#3CB0FC" title={{title}} title-color="white" left-item-title="退出" left-item-color="white"></wxc-navbar>
+    	  <div class="wrapper" style="margin-top:{{navBarHeight}}">
+ 
+      <list class="list" style="width:{{width}};" onviewappear="{{viewappear}}">
+      <refresh style="width: {{width}}; padding: 30;align-items: center;" onrefresh="refreshData" display="{{refreshDisplay}}">
+        <text class="text">{{refreshText}}</text>
+        <loading-indicator class="indicator"></loading-indicator>
+      </refresh>
+      <cell class="header">
+        <div>
+          <image style="width:{{width}};height:178;" src="local://banner_pad.jpg"></image>
+        </div>
+        <div class="buttons" style="width:{{width}};">
+            <div class="space" >
+            </div>
+            <div class="button" onclick="push(0)">
+              <image style="width:80;height:80;" src="local://todo.jpg"></image>
+              <text class="title" style="font-size:{{fontDate}}">待办公文</text>
+            </div>
+            <div class="button" onclick="push(4)">
+              <image style="width:80;height:80;" src="local://doc_new.jpg"></image>
+              <text class="title" style="font-size:{{fontDate}}">新建公文</text>
+            </div>
+            <div class="button" onclick="push(1)">
+              <image style="width:80;height:80;" src="local://mine.jpg"></image>
+              <text class="title" style="font-size:{{fontDate}}">我的公文</text>
+            </div>
+            <div class="button" onclick="push(2)">
+              <image style="width:80;height:80;" src="local://doing.jpg"></image>
+              <text class="title" style="font-size:{{fontDate}}">在办公文</text>
+            </div>
+            <div class="button" onclick="push(3)">
+              <image style="width:80;height:80;" src="local://done.jpg"></image>
+              <text class="title" style="font-size:{{fontDate}}">办结公文</text>
+            </div>
+            <div class="button" onclick="push(5)">
+              <image style="width:80;height:80;" src="local://search.jpg"></image>
+              <text class="title" style="font-size:{{fontDate}}">文件查询</text>
+            </div>
+            <div class="space" >
+            </div>
+        </div>
+      </cell>
+      <cell class="cellheader">
+        <div class="cellHeaderStyle" style="border-bottom-color:{{indicatorColor}};">
+            <image style="margin-left:20;width:30;height:30;" src="local://todo_icon.png"></image>
+           <text style="flex:9;font-size:{{fontSmallTitle}};color:#52ACF9;margin-left:8;">待办公文</text>
+           <text style="flex:1;font-size:{{fontDate}};color:{{greyTextColor}};" onclick="push(0)">更多 ···</text>
+        </div>
+      </cell>
+      <cell style="background-color:#efefef" onclick="oncellclick" repeat="item in items" id="item-{{$index}}">
+        <div class="cellStyle" style="border-bottom-color:{{indicatorColor}};">
+          <div class="leftArea">
+            <image style="width:50;height:50;margin-left:25"  src="local://todo_list_icon.png"></image>
+          </div>
+          <div class="centerArea">
+            <text style="font-size:{{fontTitle}}; color:#282828;margin-left:10;margin-right:10;">{{item.title}}</text>
+            <div style="flex-direction:row;margin-top:20">
+              <text style="margin-left:10;font-size:{{fontSmallTitle}};color:{{greyTextColor}}">{{item.createUser}}</text>
+              <text style="margin-left:20;font-size:{{fontSmallTitle}};color:{{greyTextColor}}">{{item.fileID}}</text>
+            </div>
+          </div>
+          <div>
+            <text style="font-size:{{fontDate}};color:{{greyTextColor}}">{{item.createDate}}</text>
+          </div>
+        </div>
+      </cell>
+      <loading onloading="loadingData" style="width: {{width}}; padding: 10;background-color:#F7F8F7;align-items: center;" if="{{isLoading}}" display="{{loadingDisplay}}">
+        <text class="text">更多 ···</text>
+      </loading>
+    </list>
+    <bx-loading top=400 if="{{loading}}"></bx-loading>
+    	  </div>
+  	</div>
+</template>
+<script type="config">
+  {
+    "viewport": {
+        "width": "device-width",
+        "height":"device-height"
+    }
+  }
+</script>
+<style>
+  	.wrapper {
+  		position: absolute; 
+  		top: 0; 
+  		left: 0; 
+  		right: 0; 
+  		bottom: 0; 
+  	}
+  .text{
+    color:#939393;
+    font-size:24;
+  }
+  .list{
+    background-color: #efefef;
+    flex: 1;
+  }
+
+  .buttons {
+    padding: 10;
+    flex-direction: row;
+    background-color: white;
+    height:145;
+  }
+  .space {
+      width:100;
+  }
+  .button {
+    flex: 1;
+    align-items: center;
+    background-color: white
+  }
+  .header {
+    height: 350;
+    background-color: #efefef;
+    border-bottom-color: #eeeeee;
+    border-bottom-width: 2;
+    border-bottom-style: solid;
+  }
+  .cellheader {
+    height: 62;
+    background-color: #efefef;
+    border-bottom-color: #eeeeee;
+    border-bottom-width: 2;
+    border-bottom-style: solid;
+  }
+  .cellHeaderStyle{
+    flex-direction:row;
+    border-bottom-style:solid;
+    border-bottom-width:1px;
+    margin-left:20;
+    margin-right:20;
+    height:62;
+    align-items:center;
+    background-color:white;
+  }
+  .title {
+    text-align: center;
+    color:#000000;
+  }
+  .cellStyle{
+      margin-left:20;
+    margin-right:20;
+    background-color:white;
+    flex-direction:row;
+    border-bottom-style:solid;
+    border-bottom-width:1px;
+    padding-top:30;
+    padding-bottom:30;
+    padding-right:20;
+  }
+  .leftArea{
+    flex:1;
+  }
+
+  .centerArea{
+    flex:9;
+    margin-left:10;
+  }
+
+  .img {
+    width: 70;
+    height: 70;
+  }
+</style>
+
+<script>
+  require('./components/bx-loading.we');
+  require('./components/wxc-navbar.we');
+  var navigator = require('@weex-module/navigator');
+  var getBaseURL = require('./include/base-url.js').getBaseURL;
+  var tools = require('./include/tools.js').methods;
+  var styles = require('./include/styles.js').methods;
+  var modal = require('@weex-module/modal') || {};
+  var storage = require('@weex-module/storage');
+  var getPlatform = require('./include/tools.js').methods.getPlatform;
+
+ module.exports = {
+  data: {
+    dir: 'official_doc',
+    navBarHeight: 88,
+    title: '首页',
+    isLoaded: true,
+    isLoading: false,
+    refreshText:'↓ 下拉刷新',
+    baseURL: '',
+    loading: true,
+    loadingDisplay: 'hide',
+    refreshDisplay: 'hide',
+    width:750,
+    page: 1,
+    items:[],
+    userName: '',
+    userId: '',
+    fontTitle: null,
+    fontSmallTitle: null,
+    fontDate: null,
+    greyTextColor: '',
+    indicatorColor: ''
+  },
+  created: function () {
+    
+    var self = this;
+    //iOS配置
+    this.$getConfig(function(config) {
+        var env = config.env;
+        var scale = env.scale;
+        var deviceWidth = env.deviceWidth > env.deviceHeight?env.deviceWidth:env.deviceHeight;
+        deviceWidth = deviceWidth/scale; 
+      console.log('deviceWidth', deviceWidth);
+        this.width = deviceWidth;
+            deviceWidth = env.deviceWidth/scale;
+        if (env.platform == 'iOS') {
+            this.navBarHeight = 64.0 * 750.0 / deviceWidth;
+        }
+        else {
+            this.navBarHeight = 88.0 * 750.0 / deviceWidth;
+        }
+    }.bind(this));
+
+    //获取公共样式
+    self.fontTitle = styles.getFontD();
+    self.fontSmallTitle = styles.getFontE();
+    self.fontDate = styles.getFontF();
+    self.greyTextColor = styles.getColorA();
+    self.indicatorColor = styles.getColorB();
+
+    storage.getItem('todolist_cache', function(e) {
+      var result = e.result;
+      var data = e.data;
+      if (result === 'success') {
+        var res = JSON.parse(data);
+        self.updateData(res,false);
+      } 
+      self.page = 1;
+      /*获取用户信息*/
+      weex.requireModule('user').getUserInfo(function(info){
+        console.log('获取登陆信息并存储' ,info);
+        
+        self.userName = info.attr.parameter_username;
+        self.userId = info.attr.parameter_userid;
+
+        //数据加载
+        self.renderData();
+
+      });
+      // self.renderData()
+    });
+
+    self.baseURL = getBaseURL(this);
+
+     this.$on('naviBar.leftItem.click',function(e){
+        
+          var photo = require('@weex-module/connect');
+          photo.exitApp(function(e){
+            
+          });
+        
+      
+    });
+  },
+  methods: {
+    push: function(index,e) {
+      // console.log('hit push');
+      var vm = this;
+      var url = this.baseURL;
+      if (typeof window !== 'object') {
+        switch(index) {
+          case 4:
+            url = this.baseURL + 'new-doc/new-doc.js'; 
+            storage.setItem('new-doc-dif', '1', function (e) {
+            }); 
+            break;
+          case 5:
+            url = this.baseURL + 'search-doc/query.js'; break;
+          case 0:
+            url = this.baseURL + 'todo-doc/index.js?index='+index;
+            storage.setItem('todo-list-dif', '1', function (e) {
+            });
+            break;
+          default:
+            url = this.baseURL + 'todo-doc/index.js?index='+index;
+        }
+      }
+      var params = {'url':url}
+      console.log('push url', url);
+      navigator.push(params,function(e){
+      });
+    },
+    getHQTaskList: function(userName,userId,page) {
+	    var json = {
+		  attr: {
+		    projectName: "1800OAProject",
+		    serviceName: "getToDoDoc", //   getSendTask
+		    methodName: "getTaskList"
+		  },
+		  data: {
+		    userName: userName,
+		    userId: userId,
+		    page: page
+        }
+      }
+      return json;
+    },
+    oncellclick: function(e) {
+      //显示点击列表项位置
+      var vm = this;
+      var url = this.baseURL;
+      if (typeof window !== 'object') {
+        var docId = this.items[this.$index].documentKey;
+        url = this.baseURL + 'todo-doc/to-do-detail-pad.js?docId='+docId;
+      }
+      var params = {'url':url};
+      navigator.push(params,function(e){
+      });
+    },
+    updateData: function (res, save) {
+      var self = this
+      self.refreshText='↓ 下拉刷新';
+      self.loadingDisplay = 'hide';
+      self.loading = false;
+      self.isLoading = true;
+      try {
+        if (res.status == -1) {
+          modal.toast({
+            'message': '链接服务器超时，请稍候再试', 
+            'duration': 2
+          });
+          self.isLoading = false;
+          return;
+        }
+
+        var docs = res.data.docs || []
+        if (docs.length == 0) {
+          modal.toast({
+            'message': '没有更多数据了', 
+            'duration': 2
+          });
+          self.isLoading = false;
+          return;
+        }
+
+        console.log('get docs', res.data.docs);
+        if (Array.isArray(docs)) {
+          if (self.page == 1) {
+            storage.setItem('todolist_cache', JSON.stringify(res), function(e) {
+              });
+            self.items = [];
+          }
+          for(var i = 0; i < docs.length; i++) {
+            self.items.push(docs[i])
+          }
+        }
+        if (self.items.length == res.data.totalCount)  {
+          self.isLoading = false;
+        }
+        self.page++
+        self.isLoaded = true
+      } catch(e) {}
+    },
+    renderData: function () {
+      var self = this
+      var json = self.getHQTaskList(self.userName, self.userId, this.page.toString());
+      var service = require('@weex-module/service') || {};
+      service.fetch(json, function(res) {
+        self.updateData(res, true);
+      })
+    },
+    loadingData: function (e) {
+      var self = this
+      if (self.isLoaded === false) return 
+      self.loadingDisplay = 'show'
+      self.renderData()
+    },
+    refreshData: function (e) {
+      if (this.isLoaded === false) return 
+      
+      this.refreshText='↑ 释放更新';
+      this.refreshDisplay = 'show'
+      this.loading = true
+      this.page = 1
+      this.renderData()
+      this.refreshDisplay = 'hide'
+    },
+    viewappear:function(){
+        console.log("---ceshi");
+        storage.removeItem('person-list', function (e) {
+        })
+      }
+  }
+}
+</script>

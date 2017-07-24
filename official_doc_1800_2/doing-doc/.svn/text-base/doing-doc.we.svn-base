@@ -1,0 +1,91 @@
+<template>
+   <div class="wrapper">
+   <bx-navbar height={{navBarHeight}} rightbuttons="{{rightbuttons}}" backitemsrc="local://back_button.png" backitemtitle="返回" background-color="#1C6BC8" title={{title}} title-color="white"></bx-navbar>
+    <bx-doclist list-icon="{{listIcon}}" service-name="{{serviceName}}" cell-click-url="{{cellClickUrl}}" style="margin-top:{{navBarHeight}}"></bx-doclist>
+  </div>
+</template>
+
+<style>
+    .wrapper {
+      position: absolute; 
+      top: 0; 
+      left: 0; 
+      right: 0; 
+      bottom: 0; 
+      width: 750;
+    }
+</style>
+
+<script>
+  require('weex-components');
+  require('../components/bx-navbar.we');
+  require('../components/bx-doclist.we');
+  var navigator = require('@weex-module/navigator');
+  var getBaseURL = require('../include/base-url.js').getBaseURL;
+  var tools = require('../include/tools.js').methods;
+  var setNavBarHeight = require('../include/tools.js').methods.setNavBarHeight;
+  var storage = require('@weex-module/storage');
+  module.exports = {
+
+    data: {
+      navBarHeight: 88,
+      title: '在办公文',
+      rightbuttons:[
+        {
+          rightItemSrc:"local://bar_search.png"
+        },
+        {
+          rightItemSrc:"local://bar_new.png"
+        }
+      ],
+      listIcon: 'local://doing_list_icon.png',
+      serviceName: 'getDoingDoc',
+      cellClickUrl: 'doing-doc/doing-detail.js',
+    },
+
+    created: function() {
+      var self = this;
+      //iOS配置
+      setNavBarHeight(this);
+
+      this.baseURL = getBaseURL(this);
+
+      this.$on('naviBar.leftItem.click', function(event) {
+        // When a notify comes, this handler will be run.
+        // `event.detail` will be `{a: 1}`
+        var params = {
+          animated: 'true'
+        }
+        navigator.pop(params, function () {
+        // callback
+        })
+      });
+
+      this.$on('naviBar.rightItem.click', function(event) {
+        // When a notify comes, this handler will be run.
+        // `event.detail` will be `{a: 1}`
+        var vm = this;
+        var url = this.baseURL;
+        if (typeof window !== 'object') {
+          // var docId = this.items[this.$index].documentKey;
+          var index = event.detail.index;
+          if(index == 0){
+            url = this.baseURL + 'search-doc/query.js';
+          }else if(index == 1){
+            url = this.baseURL + 'new-doc/new-doc.js';
+            storage.setItem('new-doc-dif', '1', function (e) {
+            }); 
+          } 
+        }
+        var params = {'url':url};
+        // console.log('todoList', url);
+        // vm.$call('modal', 'toast', {
+        //   'message': url
+        // });
+        navigator.push(params,function(e){
+        });
+      })
+    },
+    
+  }
+</script>

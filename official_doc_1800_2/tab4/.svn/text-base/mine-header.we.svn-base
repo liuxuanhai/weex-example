@@ -1,0 +1,83 @@
+<template>
+    <div class = "wrapper"><!--整个头部框（背景区域）-->
+        <div class = "info-wrapper " onclick = "onHeaderClick"><!--内容包裹区-->
+            <image class = "header-img" src= "{{ headerimg }}"></image><!--头像-->
+            <text class = "nomal-text" style = "margin-left:40">{{ userName }}</text><!--用户名称-->
+            
+            <image class = "right-icon" src= "{{ righticon }}" ></image><!--向右箭头-->
+            
+        </div>
+
+
+    </div>
+</template>
+
+<style>
+    .wrapper{
+        flex-direction:row;
+        
+        position: fixed;
+        top:0;
+        left:0;
+        right:0;
+        bottom:0;
+
+    }
+
+    .info-wrapper{
+         flex-direction:row;
+         align-items:center;
+         margin-top:40;
+         width:750;
+         background-color:#ffffff;
+         border-bottom-width:2;
+         border-bottom-color:rgb(220,220,220);
+    }
+
+    .header-img{
+        width:125;
+        height:125;
+        margin-right:10;
+        margin-left:25;
+    }
+
+    .right-div{
+        height:125;
+        justify-content:center;
+    }
+
+    .nomal-text {
+        color: black;
+        font-size:30;
+        flex:1;
+    }
+
+    .right-icon {
+        width:35;
+        height:35;
+        margin-right:40;
+        resize:contain;
+    }
+</style>
+
+<script>
+
+ var storage = require('@weex-module/storage');
+
+    module.exports = {
+         data: {
+            headerimg:null,
+            userName:null,
+            righticon:'local://right_icon.png',
+         },
+
+         methods: {
+            onHeaderClick: function() {
+
+            }
+         },
+         created : function (){
+
+         }
+     }
+</script>

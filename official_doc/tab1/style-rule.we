@@ -1,0 +1,81 @@
+<template>
+    <div class="wrapper">
+       <bx-navbar height={{navBarHeight}} backitemsrc="local://back_button.png" backitemtitle="返回" background-color={{backgroundColor}} title={{title}} title-color={{titleColor}}></bx-navbar>
+       <web id="webview" src="{{src}}" class="webStyle"  onpagefinish="finishload" style="margin-top:{{navBarHeight}}"></web>  
+       <bx-loading top=200 if="{{loading}}"></bx-loading>
+    </div>
+</template>
+
+<style>
+    .wrapper { 
+        width: 750; 
+        position: absolute; 
+        top: 0; 
+        left: 0; 
+        right: 0; 
+        bottom: 0;
+        align-items: center; 
+        justify-content: center;
+    }
+      .webStyle {
+        position: absolute; 
+        top: 0; 
+        left: 0; 
+        right: 0; 
+        bottom: 0;
+  }
+</style>
+
+<script>
+    require('../components/bx-loading.we');
+    require('../components/bx-navbar.we');
+    var navigator = require('@weex-module/navigator');
+    var web_module = require('@weex-module/webview')
+    var styles = require('../include/styles.js').methods;
+    var getBaseURL = require('../include/base-url.js').getBaseURL;
+    module.exports = {
+        data: {
+            loading: true,
+            src : "",
+            navBarHeight: 88,
+            backgroundColor:"#1C6BC8",
+            titleColor:"white",
+            title: '1800UI规范',
+            baseURL: '',
+        },
+        created: function() {
+            styles.setCustomColor(this);
+            this.$getConfig(function (config) {
+                var env = config.env;
+                if(env.platform == 'iOS'){
+                    var scale = env.scale;
+                    var deviceWidth = env.deviceWidth / scale;
+                    this.navBarHeight = 64.0 * 750.0 / deviceWidth;
+                }
+                else {
+                    this.loading = false;
+                }
+            }.bind(this));
+            
+            this.baseURL = getBaseURL(this);
+            this.src = this.baseURL + '1800/styles.html'
+
+                //返回按钮点击事件
+            this.$on('naviBar.leftItem.click', function(event) {
+                // When a notify comes, this handler will be run.
+                // `event.detail` will be `{a: 1}`
+                var params = {
+                animated: 'true'
+                }
+                navigator.pop(params, function () {
+                // callback
+                })
+            });
+        },
+        methods: {
+            finishload: function(e) {
+                this.loading = false;
+            }
+        }
+    }
+</script>
