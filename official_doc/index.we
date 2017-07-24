@@ -11,64 +11,54 @@
 <template>
   <div>
     <!-- <wxc-navbar></wxc-navbar> -->
-    <wxc-tabbar class="tabbar" tab-items={{tabItems}} selected-color={{selectColor}}></wxc-tabbar>
+    <wxc-tabbar class="tabbar" tab-items={{tabItems}} unselected-color={{unselectColor}} selected-color={{selectColor}}></wxc-tabbar>
   </div>
 </template>
 
 <script>
   require('weex-components')
+  var styles = require('./include/styles.js').methods;
+  var tools = require('./include/tools.js').methods;
   module.exports = {
     data: {
       dir: 'official_doc',
       selectColor:"#238EF5",
-      tabItems: [
-        {
-          index: 0,
-          title: "首页",
-          titleColor: 0x0,
-          icon: "",
-          image: "http://gtms01.alicdn.com/tps/i1/TB1qw.hMpXXXXagXXXX9t7RGVXX-46-46.png",
-          selectedImage: "local://tab1_selected.png",
-          src: "tab1/index.js",
-          visibility: "visible",
-        },
-        {
-          index: 1,
-          title: "待办",
-          titleColor: 0x0,
-          icon:"",
-          image: "local://tab2.png",
-          selectedImage: "http://gtms02.alicdn.com/tps/i2/TB1qysbMpXXXXcnXXXX9t7RGVXX-46-46.png",
-          src: "tab2/tabbar-item.js?itemId=tab2",
-          visibility: "hidden",
-        },
-        {
+      unselectColor:"#6b6969",
+      tabItems: [{
+	      index: 0,
+	      title: "模板",
+	      titleColor: 0x0,
+	      icon: "",
+	      image: "local://tab1.png",
+	      selectedImage: "local://tab1_selected.png",
+	      src: "tab1/index.js",
+	      visibility: "visible"
+	    }, {
+	      index: 1,
+	      title: "Cloud App",
+	      titleColor: 0x0,
+	      icon: "",
+	      image: "local://tab2.png",
+	      selectedImage: "local://tab2_selected.png",
+	      src: "tab2/index.js",
+	      visibility: "hidden"
+	    }, {
           index: 2,
-          title: "新建",
+          title: "帮助文档",
           titleColor: 0x0,
           icon:"",
           image: "local://tab3.png",
-          selectedImage: "http://gtms04.alicdn.com/tps/i4/TB1NxY5MpXXXXcrXpXX9t7RGVXX-46-46.png",
-          src: "tab3/tabbar-item.js?itemId=tab3",
+          selectedImage: "local://tab3_selected.png",
+          src: "tab3/index.js",
           visibility: "hidden",
-        },
-        {
-            index: 3,
-            title: "我的",
-            titleColor: 0x0,
-            icon:"",
-            image: "local://tab4.png",
-            selectedImage: "http://gtms04.alicdn.com/tps/i4/TB1NxY5MpXXXXcrXpXX9t7RGVXX-46-46.png",
-            src: "tab4/tabbar-item.js",
-            visibility: "hidden",
-        }
+      }
       ],
     },
     created: function () {
       var bundleUrl = this.$getConfig().bundleUrl;
       var nativeBase;
       var isAndroidAssets = bundleUrl.indexOf('your_current_IP') >= 0 || bundleUrl.indexOf('file://assets/')>=0;
-      var isiOSAssets = bundleUrl.indexOf('file:///') >= 0 && bundleUrl.indexOf('WeexDemo.app') > 0;
+      var isiOSAssets = bundleUrl.indexOf('file:///') >= 0 && bundleUrl.indexOf('BXProject.app') > 0;
       if (isAndroidAssets) {
         nativeBase = 'file://assets/';
       } else if (isiOSAssets) {
@@ -90,11 +80,12 @@
         // in Browser or WebView
         base = h5Base;
       }
-
+      var style = tools.getParameterByName("styles",bundleUrl);
       for(var i = 0; i < this.tabItems.length; i++) {
           var tabItem = this.tabItems[i];
-          tabItem.src = base + tabItem.src;
+          tabItem.src = base + tabItem.src +'?styles='+style;
       }
+      styles.setTabCustomColor(this);
     },
     methods: {
       ready: function (e) {
