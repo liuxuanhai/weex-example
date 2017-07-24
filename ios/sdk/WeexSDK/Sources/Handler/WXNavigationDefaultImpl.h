@@ -11,4 +11,5 @@
 
 @interface WXNavigationDefaultImpl : NSObject <WXNavigationProtocol>
 
+@property (nonatomic, weak) WXSDKInstance *weexInstance;
 @end

@@ -13,6 +13,7 @@
 #import "WXImgLoaderProtocol.h"
 #import "WXHandlerFactory.h"
 #import "WXConvert.h"
+#import "WXURLRewriteProtocol.h"
 
 @interface WXBarButton :UIButton
 
@@ -128,6 +129,9 @@
         case WXNavigationItemPositionCenter:
             [self setNaviBarTitle:param completion:block withContainer:container];
             break;
+        case WXNavigationItemPositionRights:
+            [self setNaviBarRightItems:param completion:block withContainer:container];
+            break;
         default:
             break;
     }
@@ -149,6 +153,9 @@
             break;
         case WXNavigationItemPositionCenter:
             [self clearNaviBarTitle:param completion:block withContainer:container];
+            break;
+        case WXNavigationItemPositionRights:
+            [self clearNaviBarRightItems:param completion:block withContainer:container];
             break;
         default:
             break;
@@ -194,6 +201,8 @@
     UIView *view = [self barButton:param position:WXNavigationItemPositionRight withContainer:container];
     
     if (!view) {
+        container.navigationItem.rightBarButtonItem = nil;
+        container.navigationItem.rightBarButtonItems = nil;
         [self callback:block code:MSG_FAILED data:nil];
         return;
     }
@@ -203,10 +212,48 @@
     [self callback:block code:MSG_SUCCESS data:nil];
 }
 
+- (void)setNaviBarRightItems:(NSDictionary *)param completion:(WXNavigationResultBlock)block
+              withContainer:(UIViewController *)container
+{
+    if (0 == [param count]) {
+        container.navigationItem.rightBarButtonItems = nil;
+        [self callback:block code:MSG_PARAM_ERR data:nil];
+        return;
+    }
+    
+    UIView *view = [self barButton:param position:WXNavigationItemPositionRights withContainer:container];
+    
+    if (!view) {
+        container.navigationItem.rightBarButtonItems = nil;
+        [self callback:block code:MSG_FAILED data:nil];
+        return;
+    }
+    
+    NSArray* buttons = container.navigationItem.rightBarButtonItems;
+    UIBarButtonItem* rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:view];
+    
+    NSMutableArray* rightBarButtons = [NSMutableArray new];
+    [rightBarButtons addObject:rightBarButtonItem];
+    if (buttons.count > 0) {
+        [rightBarButtons addObjectsFromArray:buttons];
+    }
+    container.navigationItem.rightBarButtonItems = rightBarButtons;
+    
+    [self callback:block code:MSG_SUCCESS data:nil];
+}
+
 - (void)clearNaviBarRightItem:(NSDictionary *) param completion:(WXNavigationResultBlock)block
                 withContainer:(UIViewController *)container
 {
     container.navigationItem.rightBarButtonItem = nil;
+    
+    [self callback:block code:MSG_SUCCESS data:nil];
+}
+
+- (void)clearNaviBarRightItems:(NSDictionary *) param completion:(WXNavigationResultBlock)block
+                withContainer:(UIViewController *)container
+{
+    container.navigationItem.rightBarButtonItems = nil;
     
     [self callback:block code:MSG_SUCCESS data:nil];
 }
@@ -279,8 +326,9 @@
             button.nodeRef = param[@"nodeRef"];
             button.position = position;
             [button addTarget:self action:@selector(onClickBarButton:) forControlEvents:UIControlEventTouchUpInside];
-            
-            [[self imageLoader] downloadImageWithURL:icon imageFrame:CGRectMake(0, 0, 25, 25) userInfo:nil completed:^(UIImage *image, NSError *error, BOOL finished) {
+            NSMutableString *newURL = [icon mutableCopy];
+            WX_REWRITE_URL(icon, WXResourceTypeImage, self.weexInstance, &newURL)
+            [[self imageLoader] downloadImageWithURL:newURL imageFrame:CGRectMake(0, 0, 25, 25) userInfo:nil completed:^(UIImage *image, NSError *error, BOOL finished) {
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [button setBackgroundImage:image forState:UIControlStateNormal];
                     [button setBackgroundImage:image forState:UIControlStateHighlighted];

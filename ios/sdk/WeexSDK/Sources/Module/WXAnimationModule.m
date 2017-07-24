@@ -73,7 +73,7 @@
 
 - (void)animationDidStart:(CAAnimation *)anim
 {
-    if ([_animationInfo.propertyName hasPrefix:@"transform"]) {
+    if ([_animationInfo.propertyName hasPrefix:@"transform"] && _animationInfo.target) {
         WXTransform *transform = _animationInfo.target->_transform;
         [transform applyTransformForView:_animationInfo.target.view];
     } else if ([_animationInfo.propertyName isEqualToString:@"backgroundColor"]) {

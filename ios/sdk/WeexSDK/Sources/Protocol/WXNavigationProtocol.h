@@ -15,7 +15,9 @@ typedef NS_ENUM(NSInteger, WXNavigationItemPosition) {
     WXNavigationItemPositionCenter = 0x00,
     WXNavigationItemPositionRight,
     WXNavigationItemPositionLeft,
-    WXNavigationItemPositionMore
+    WXNavigationItemPositionMore,
+    WXNavigationItemPositionRights,
+    WXNavigationItemPositionBack
 };
 
 /**

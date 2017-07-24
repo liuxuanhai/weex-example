@@ -151,6 +151,11 @@
 
 - (instancetype)initWithRef:(NSString *)ref type:(NSString *)type styles:(NSDictionary *)styles attributes:(NSDictionary *)attributes events:(NSArray *)events weexInstance:(WXSDKInstance *)weexInstance
 {
+    if ([styles objectForKey:@"position"]) {
+        NSMutableDictionary * styless = [NSMutableDictionary dictionaryWithDictionary:styles];
+        [styless removeObjectForKey:@"position"];
+        styles = styless;
+    }
     if (self = [super initWithRef:ref type:type styles:styles attributes:attributes events:events weexInstance:weexInstance]) {
         
         _sections = [NSMutableArray array];

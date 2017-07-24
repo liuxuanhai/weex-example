@@ -78,6 +78,7 @@
 
 - (void)viewWillDisappear:(BOOL)animated
 {
+    [super viewWillDisappear:animated];
     [_instance fireGlobalEvent:WX_APPLICATION_WILL_RESIGN_ACTIVE params:nil];
 }
 

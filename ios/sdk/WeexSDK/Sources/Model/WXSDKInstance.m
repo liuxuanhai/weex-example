@@ -389,7 +389,7 @@ typedef enum : NSUInteger {
     if ([url hasPrefix:@"//"] && [_scriptURL isFileURL]) {
         return [NSURL URLWithString:url];
     }
-    if (!url) {
+    if (url.length == 0) {
         return nil;
     }
     

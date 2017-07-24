@@ -61,6 +61,9 @@
         else if ([position isEqualToString:@"center"]) {
             [self setNavigationItemWithParam:data position:WXNavigationItemPositionCenter];
         }
+        else if ([position isEqualToString:@"rights"]) {
+            [self setNavigationItemWithParam:data position:WXNavigationItemPositionRights];
+        }
     }
 }
 
@@ -110,14 +113,26 @@
     
     __weak __block typeof(WXComponent) *weakSelf = self;
     
-    NSArray *array = @[@"center",@"right",@"left",@"more"];
+    NSArray *array = @[@"center",@"right",@"left",@"more",@"rights"];
     
     [self _parse:param resultBlock:^(NSDictionary *dict) {
         NSMutableDictionary *styles = weakSelf.weexInstance.naviBarStyles;
-        [styles setObject:dict forKey: array[position]];
+        if (position == WXNavigationItemPositionRights) {
+            NSArray* arrayRights = [styles objectForKey:array[position]];
+            NSMutableArray* rights = [[NSMutableArray alloc] init];
+            if (arrayRights) {
+                [rights addObjectsFromArray:arrayRights];
+            }
+            [rights addObject:dict];
+            [styles setObject:rights forKey:array[position]];
+        }
+        else {
+            [styles setObject:dict forKey: array[position]];
+        }
         
         UIViewController *container = weakSelf.weexInstance.viewController;
         id<WXNavigationProtocol> navigator = [weakSelf navigator];
+        [navigator setWeexInstance:self.weexInstance];
         
         WXPerformBlockOnMainThread(^{
             [navigator setNavigationItemWithParam:dict position:position completion:nil withContainer:container];
@@ -134,9 +149,18 @@
         [navigator setNavigationBarHidden:NO animated:NO withContainer:container];
         [navigator setNavigationBackgroundColor:styles[kBarTintColor] withContainer:container];
         
-        NSArray *array = @[@"center",@"right",@"left",@"more"];
+        NSArray *array = @[@"center",@"right",@"left",@"more",@"rights"];
         [array enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-            [navigator setNavigationItemWithParam:styles[obj] position:idx completion:nil withContainer:container];
+            if (idx == WXNavigationItemPositionRights) {
+                [navigator clearNavigationItemWithParam:nil position:idx completion:nil withContainer:container];
+                NSArray* rights = styles[obj];
+                for (NSDictionary *param in rights) {
+                    [navigator setNavigationItemWithParam:param position:idx completion:nil withContainer:container];
+                }
+            }
+            else {
+                [navigator setNavigationItemWithParam:styles[obj] position:idx completion:nil withContainer:container];
+            }
         }];
     }
     else {

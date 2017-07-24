@@ -119,6 +119,9 @@ static const CGFloat WXToastDefaultPadding = 30.0;
 {
     WXAssertMainThread();
     UIView *superView =  [[[UIApplication sharedApplication] windows] objectAtIndex:0];
+    if (superView && superView.hidden) {
+        superView =  [[[UIApplication sharedApplication] windows] objectAtIndex:1];
+    }
     if (!superView) {
         superView =  self.weexInstance.rootView;
     }
