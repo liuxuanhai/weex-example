@@ -34,7 +34,7 @@ Support Android 4.1 (API 16) and iOS 7.0+.
     * Install [CocoaPods](https://guides.cocoapods.org/using/getting-started.html)
 * Run playground
     * `cd ios/BXProject`
-    ~~* `sudo gem install cocoapods-repo-svn`,里面有svn二方库，需要支持svn
+    * ~~`sudo gem install cocoapods-repo-svn`,里面有svn二方库，需要支持svn~~
     * `svn info —username [your username] —password [your password] http://[your svn ip]/scm/svn/MobileRepository`
     * `pod repo-svn add bricks http://[your svn ip]/scm/svn/MobileRepository`~~
     * `pod install`
