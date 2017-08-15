@@ -185,3 +185,19 @@ require('../components/bx-navbar.we');
     }
 </script>
 ```
+ ### 准备热更新包
+ * 打zip包
+   * `cd official_doc/build`
+   * `zip -e wxhome.zip **/* *`，输入密码（必须和代码里的解码保持一致）
+   * `md5 wxhome.zip`，记录下md5值，更新到之后创建的packet.json文件里。
+   * 把wxhome.zip上传到服务器上，记录下URL值，更新到之后创建的packet.json文件里。
+ * 创建packet.json
+ ```
+ {
+    "minVersion":1,
+    "url":"http://10.25.67.60:12580/official_doc/wxhome.zip",
+    "md5":"87bb10864ae1e0f3444b91b1ab7904d7"
+}
+```
+ * 把packet.json上传到服务器上
+
