@@ -1,7 +1,8 @@
 var path = require('path');
 var fs = require('fs');
 var webpack = require('webpack');
-
+var UglifyJS = require("uglify-js");
+console.log("----------给个机会老大！！");
 var entry = {};
 var bannerExcludeFiles = [];
 
@@ -17,10 +18,11 @@ function walk(dir) {
         var name = path.join('official_doc', 'build', dir, path.basename(file, extname));
         entry[name] = fullpath + '?entry=true';
         if (extname === '.we') {
-          bannerExcludeFiles.push(name + '.js')
+            bannerExcludeFiles.push(name + '.js');
         }
       } else if (stat.isDirectory() && file !== 'build' && file !== 'include') {
         var subdir = path.join(dir, file);
+        console.log("subdir",subdir);
         walk(subdir);
       }
     });
@@ -33,6 +35,13 @@ var banner = '// { "framework": "Vue" }\n'
 var bannerPlugin = new webpack.BannerPlugin(banner, {
   raw: true,
   exclude: bannerExcludeFiles
+})
+
+var uglfyJsPlugin = new webpack.optimize.UglifyJsPlugin({
+    compress:{
+        warnings: false //压缩警告
+    },
+    mangle:false //是否混淆压缩
 })
 
 module.exports = {
@@ -49,5 +58,8 @@ module.exports = {
       }
     ]
   },
-  plugins: [bannerPlugin]
+  plugins: [
+      bannerPlugin,
+      uglfyJsPlugin
+  ]
 }
