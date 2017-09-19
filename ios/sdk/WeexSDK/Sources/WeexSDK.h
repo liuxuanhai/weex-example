@@ -1,16 +1,29 @@
-/**
- * Created by Weex.
- * Copyright (c) 2016, Alibaba, Inc. All rights reserved.
- * 
- * This source code is licensed under the Apache Licence 2.0.
- * For the full copyright and license information,please view the LICENSE file in the root directory of this source tree.
+/*
+* Licensed to the Apache Software Foundation (ASF) under one 
+* or more contributor license agreements.  See the NOTICE file
+* distributed with this work for additional information
+* regarding copyright ownership.  The ASF licenses this file
+* to you under the Apache License, Version 2.0 (the
+* "License"); you may not use this file except in compliance
+* with the License.  You may obtain a copy of the License at
+*
+*   http://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing,
+* software distributed under the License is distributed on an
+* "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+* KIND, either express or implied.  See the License for the
+* specific language governing permissions and limitations
+* under the License.
  */
 
 #ifdef __OBJC__
 
+#import "WXValidateProtocol.h"
 #import "WXUtility.h"
 #import "WXURLRewriteProtocol.h"
 #import "WXType.h"
+#import "WXTracingManager.h"
 #import "WXScrollerProtocol.h"
 #import "WXScrollerComponent.h"
 #import "WXSDKManager.h"
@@ -21,6 +34,7 @@
 #import "WXResourceResponse.h"
 #import "WXResourceRequestHandler.h"
 #import "WXResourceRequest.h"
+#import "WXPrerenderManager.h"
 #import "WXNetworkProtocol.h"
 #import "WXNavigationProtocol.h"
 #import "WXMonitor.h"
@@ -31,11 +45,14 @@
 #import "WXLayoutDefine.h"
 #import "WXJSExceptionProtocol.h"
 #import "WXJSExceptionInfo.h"
+#import "WXIndicatorComponent.h"
 #import "WXImgLoaderProtocol.h"
 #import "WXEventModuleProtocol.h"
+#import "WXErrorView.h"
 #import "WXDefine.h"
 #import "WXDebugTool.h"
 #import "WXConvert.h"
+#import "WXConfigCenterProtocol.h"
 #import "WXComponentManager.h"
 #import "WXComponent.h"
 #import "WXBridgeProtocol.h"
@@ -43,6 +60,7 @@
 #import "WXBaseViewController.h"
 #import "WXAppMonitorProtocol.h"
 #import "WXAppConfiguration.h"
+#import "WXAComponent.h"
 #import "NSObject+WXSwizzle.h"
 #import "Layout.h"
 

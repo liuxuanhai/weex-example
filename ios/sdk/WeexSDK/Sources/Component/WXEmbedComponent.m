@@ -1,9 +1,20 @@
-/**
- * Created by Weex.
- * Copyright (c) 2016, Alibaba, Inc. All rights reserved.
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
  *
- * This source code is licensed under the Apache Licence 2.0.
- * For the full copyright and license information,please view the LICENSE file in the root directory of this source tree.
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
  */
 
 #import "WXEmbedComponent.h"
@@ -47,7 +58,7 @@
         _createFinished = NO;
         _renderFinished = NO;
         
-        _sourceURL = [NSURL URLWithString: attributes[@"src"]];
+        self.sourceURL = [NSURL URLWithString: attributes[@"src"]];
         _visible =  [WXConvert WXVisibility:styles[@"visibility"]];
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(observeInstanceState:) name:WX_INSTANCE_NOTIFICATION_UPDATE_STATE object:nil];
@@ -82,8 +93,8 @@
     
     if (attributes[@"src"]) {
         NSURL *sourceURL = [NSURL URLWithString:attributes[@"src"]];
-        if (!sourceURL|| ![[sourceURL absoluteString] isEqualToString:[_sourceURL absoluteString]]) {
-            _sourceURL = sourceURL;
+        if (!sourceURL|| ![[sourceURL absoluteString] isEqualToString:[self.sourceURL absoluteString]]) {
+            self.sourceURL = sourceURL;
             _createFinished = NO;
             [self _layoutEmbedView];
         }
@@ -92,7 +103,7 @@
 
 - (void)refreshWeex
 {
-    [self _renderWithURL:_sourceURL];
+    [self _renderWithURL:self.sourceURL];
 }
 
 - (void)_layoutEmbedView
@@ -100,7 +111,7 @@
     if (_visible == WXVisibilityShow) {
         [self _updateState:WeexInstanceAppear];
         if (!_createFinished && !CGRectEqualToRect(CGRectZero, self.calculatedFrame)) {
-            [self _renderWithURL:_sourceURL];
+            [self _renderWithURL:self.sourceURL];
         }
     }
     else {
@@ -119,7 +130,7 @@
     _embedInstance.parentInstance = self.weexInstance;
     _embedInstance.parentNodeRef = self.ref;
     _embedInstance.frame = CGRectMake(0.0f, 0.0f, self.view.frame.size.width, self.view.frame.size.height);
-    _embedInstance.pageName = [[WXUtility urlByDeletingParameters:sourceURL]  absoluteString];
+    _embedInstance.pageName = sourceURL.absoluteString;
     _embedInstance.pageObject = self.weexInstance.viewController;
     _embedInstance.viewController = self.weexInstance.viewController;
     
@@ -184,6 +195,12 @@
             [[WXSDKManager bridgeMgr] fireEvent:self.embedInstance.instanceId ref:WX_SDK_ROOT_REF type:@"viewdisappear" params:nil domChanges:nil];
         }
     }
+}
+
+- (void)_frameDidCalculated:(BOOL)isChanged
+{
+    [super _frameDidCalculated:isChanged];
+    self.embedInstance.frame = self.calculatedFrame;
 }
 
 - (void)onclickErrorView
