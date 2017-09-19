@@ -4,6 +4,8 @@
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
+	<key>CFBundleDisplayName</key>
+	<string>BaseApp</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -18,40 +20,6 @@
 	<string>1.0</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
-	<key>CFBundleVersion</key>
-	<string>1</string>
-	<key>LSRequiresIPhoneOS</key>
-	<true/>
-	<key>UILaunchStoryboardName</key>
-	<string>LaunchScreen</string>
-	<key>UIMainStoryboardFile</key>
-	<string>Main</string>
-	<key>UIViewControllerBasedStatusBarAppearance</key>
-	<false/>
-	<key>UIRequiredDeviceCapabilities</key>
-	<array>
-		<string>armv7</string>
-	</array>
-	<key>UISupportedInterfaceOrientations</key>
-	<array>
-		<string>UIInterfaceOrientationPortrait</string>
-	</array>
-	<key>NSAppTransportSecurity</key>
-	<dict>
-		<key>NSAllowsArbitraryLoads</key>
-		<true/>
-	</dict>
-	<key>UISupportedInterfaceOrientations~ipad</key>
-	<array>
-		<string>UIInterfaceOrientationPortrait</string>
-		<string>UIInterfaceOrientationPortraitUpsideDown</string>
-		<string>UIInterfaceOrientationLandscapeLeft</string>
-		<string>UIInterfaceOrientationLandscapeRight</string>
-	</array>
-	<key>iPlat4M_SourcePlatFormID</key>
-	<string>com.baosight.iplat4mipad</string>
-	<key>iPlat4M_SourcePlatFormName</key>
-	<string>com.baosight.iplat4mipad</string>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
@@ -65,13 +33,55 @@
 			</array>
 		</dict>
 	</array>
+	<key>CFBundleVersion</key>
+	<string>1</string>
+	<key>LSRequiresIPhoneOS</key>
+	<true/>
 	<key>MbsHttpURLString</key>
 	<string>http://${BS_SERVER_IP}/iPlatMBS/AgentService</string>
 	<key>MbsHttpsURLString</key>
 	<string>http://${BS_SERVER_IP}/iPlatMBS/LoginService</string>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+	</dict>
 	<key>PlatformDLURL</key>
 	<string>http://${BS_SERVER_IP}/iPlatMBS/appstore/release/${SERVER_BUNDLE_ID}/${SERVER_BUNDLE_ID}.plist</string>
+	<key>SApplicationQueriesSchemes</key>
+	<array>
+		<string>com.baosight.iplat4mipad</string>
+	</array>
+	<key>UIApplicationExitsOnSuspend</key>
+	<true/>
+	<key>UILaunchStoryboardName</key>
+	<string>LaunchScreen</string>
+	<key>UIMainStoryboardFile</key>
+	<string>Main</string>
+	<key>UIRequiredDeviceCapabilities</key>
+	<array>
+		<string>armv7</string>
+	</array>
+	<key>UISupportedInterfaceOrientations</key>
+	<array>
+		<string>UIInterfaceOrientationPortrait</string>
+	</array>
+	<key>UISupportedInterfaceOrientations~ipad</key>
+	<array>
+		<string>UIInterfaceOrientationLandscapeLeft</string>
+		<string>UIInterfaceOrientationLandscapeRight</string>
+	</array>
+	<key>UIViewControllerBasedStatusBarAppearance</key>
+	<false/>
 	<key>UpdateURLString</key>
 	<string>http://${BS_SERVER_IP}/iPlatMBS/appstore/release/${BUNDLE_ID}/${BUNDLE_ID}.plist</string>
+	<key>iPlat4M_SourcePlatFormID</key>
+	<string>com.baosight.iplat4mipad</string>
+	<key>iPlat4M_SourcePlatFormName</key>
+	<string>com.baosight.iplat4mipad</string>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>com.baosight.iplat4mipad</string>
+	</array>
 </dict>
 </plist>

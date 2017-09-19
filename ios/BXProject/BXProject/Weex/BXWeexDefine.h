@@ -5,7 +5,7 @@
 
 #import <Foundation/Foundation.h>
 
-#define CURRENT_IP @"your computer device ip"
+#define CURRENT_IP @"10.25.67.59"
 
 #if TARGET_IPHONE_SIMULATOR
     #define DEMO_HOST @"127.0.0.1"
@@ -17,7 +17,7 @@
 
 #define HOME_URL [NSString stringWithFormat:@"http://%@:12580/official_doc/build/index.js", DEMO_HOST]
 
-#define BUNDLE_URL [NSString stringWithFormat:@"file://%@/bundlejs/index.js",[NSBundle mainBundle].bundlePath]
+#define BUNDLE_URL [NSString stringWithFormat:@"file://%@/assets/index.js",[NSBundle mainBundle].bundlePath]
 
 #define UITEST_HOME_URL @"http://test?_wx_tpl=http://localhost:12580/test/build/TC__Home.js"
 

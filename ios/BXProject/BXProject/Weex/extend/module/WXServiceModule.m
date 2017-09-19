@@ -9,48 +9,41 @@
 #import "WXServiceModule.h"
 #import <iPlat4M_framework/iPlat4M_framework.h>
 
-@interface WXServiceModule () {
-    WXModuleCallback _callback;
-}
-
-@end
-
 @implementation WXServiceModule
 
 @synthesize weexInstance;
 
 WX_EXPORT_METHOD(@selector(fetch:callback:))
+WX_EXPORT_METHOD(@selector(fetchFile:callback:))
 
 - (void)fetch:(NSMutableDictionary *)params callback:(WXModuleCallback)callback {
-    _callback = callback;
-    [[Container instance].serviceAgent callWebServiceWithObject:_callback
-                                                    requestDict:params
-                                                         target:self
-                                                successCallBack:@selector(successCallBack: data:)
-                                                   failCallBack:@selector(failCallBack: data:)];
+    [[Container instance].serviceAgent callWebServiceWithObject:self requestDict:params successWithCallbackBlock:^(NSMutableDictionary *data) {
+        if (callback) {
+            callback(data);
+        }
+    } failWithCallbackBlock:^(NSMutableDictionary *data) {
+        if (callback) {
+            callback(data);
+        }
+    }];
     
 }
 
-- (void)successCallBack:(WXModuleCallback)sender data:(id)data{
-    WXModuleCallback callback = sender;
-    if (callback) {
-        callback(data);
-    }
-    NSInteger status = [[(NSMutableDictionary *)data objectForKey:@"status"] intValue];
-    if (status == IPLAT4M_STATUS_SUCCESS) {
-       // GetHQTaskListResponseVo *vo = [[GetHQTaskListResponseVo alloc] initWithDic:result];
-        
-    }else{
-        //请求服务器失败，请稍后再试
-    }
-    
-}
-- (void)failCallBack:(WXModuleCallback)sender data:(id)data{
-    //业务操作失败
-    WXModuleCallback callback = sender;
-    if (callback) {
-        callback(data);
-    }
+- (void)fetchFile:(NSString*)url callback:(WXModuleCallback)callback {
+    EiInfo * eiInfo = [[EiInfo alloc] init];
+    [eiInfo set:PROJECT_TOKEN value:@"FileService"];
+    [eiInfo set:@"fileurl" value:url];
+    [[Container instance].serviceAgent callService:eiInfo successWithCallbackBlock:^(EiInfo * info) {
+        if (callback) {
+            id data = [EiInfo2Json EiInfo2JsonObject:info];
+            callback(data);
+        }
+    } failWithCallbackBlock:^(EiInfo * info) {
+        if (callback) {
+            id data = [EiInfo2Json EiInfo2JsonObject:info];
+            callback(data);
+        }
+    }];
 }
 
 @end

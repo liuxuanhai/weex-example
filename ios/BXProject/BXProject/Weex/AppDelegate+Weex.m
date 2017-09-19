@@ -12,6 +12,8 @@
 #import "WXImgLoaderDefaultImpl.h"
 #import "WXEventModule.h"
 #import "WXServiceModule.h"
+#import "WXCacheModule.h"
+#import "WXLoginModule.h"
 #import <WeexSDK/WeexSDK.h>
 
 @implementation BXAppDelegate (Weex)
@@ -27,9 +29,11 @@
     [WXSDKEngine registerComponent:@"select" withClass:NSClassFromString(@"WXSelectComponent")];
     [WXSDKEngine registerModule:@"event" withClass:[WXEventModule class]];
     [WXSDKEngine registerModule:@"service" withClass:[WXServiceModule class]];
+    [WXSDKEngine registerModule:@"user" withClass:[WXLoginModule class]];
+    [WXSDKEngine registerModule:@"cache" withClass:[WXCacheModule class]];
     
 #if !(TARGET_IPHONE_SIMULATOR)
-    [self checkUpdate];
+    //[self checkUpdate];
 #endif
     
 #ifdef DEBUG
