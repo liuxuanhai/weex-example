@@ -2,7 +2,6 @@ var path = require('path');
 var fs = require('fs');
 var webpack = require('webpack');
 var UglifyJS = require("uglify-js");
-console.log("----------给个机会老大！！");
 var entry = {};
 var bannerExcludeFiles = [];
 
@@ -22,7 +21,6 @@ function walk(dir) {
         }
       } else if (stat.isDirectory() && file !== 'build' && file !== 'include') {
         var subdir = path.join(dir, file);
-        console.log("subdir",subdir);
         walk(subdir);
       }
     });
@@ -41,7 +39,9 @@ var uglfyJsPlugin = new webpack.optimize.UglifyJsPlugin({
     compress:{
         warnings: false //压缩警告
     },
-    mangle:false //是否混淆压缩
+    //保留banner
+    comments: /{ "framework": "Vue" }/,
+    sourceMap: true
 })
 
 module.exports = {
