@@ -1,0 +1,28 @@
+<ion-view view-title="{{name}}">
+  <ion-content class="padding"  style="width:100%;">
+    <div class="item item-input item-input" style="width:100%;height: 40px;">
+      <label style="width:33%;text-align: center">
+        报警值:{{val}}
+      </label>
+      <label style="width:33%;text-align: center">
+        报警下限:{{lower}}
+      </label>
+      <label style="width:33%;text-align: center">
+        报警上限:{{upper}}
+      </label>
+    </div>
+    <div class="item item-input item-select"  style="width:100%;">
+      <div class="input-label">
+        时间区间
+      </div>
+      <select  ng-model="minuState" ng-change="showSelectValue(minuState)"
+               ng-options="state.minus for state in minuStates">
+      </select>
+    </div>
+
+    <div>
+      <liness id="maina" legend="legend" item="item" data="data" ></liness>
+      <!--<line id="main"></line>-->
+    </div>
+  </ion-content>
+</ion-view>

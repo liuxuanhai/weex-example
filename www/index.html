@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <title></title>
+
+    <link rel="manifest" href="manifest.json">
+
+    <!-- un-comment this code to enable service worker
+    <script>
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('service-worker.js')
+          .then(() => console.log('service worker installed'))
+          .catch(err => console.log('Error', err));
+      }
+    </script>-->
+
+    <link href="lib/ionic/css/ionic.css" rel="stylesheet">
+    <link href="lib/ionic/css/icomoon.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <link href="css/alarmStyle.css" rel="stylesheet">
+
+    <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
+    <link href="css/ionic.app.css" rel="stylesheet">
+    -->
+
+    <!-- ionic/angularjs js -->
+    <script src="lib/ionic/js/ionic.bundle.js"></script>
+
+    <!-- cordova script (this will be a 404 during development) -->
+    <script src="lib/ngCordova/dist/ng-cordova.js"></script>
+    <script src="cordova.js"></script>
+
+    <!-- 导入eiinfo依赖 -->
+    <script src="lib/eiinfo/jquery.js"></script>
+    <!--script src="lib/eiinfo/require.js"></script-->
+    <script src="lib/eiinfo/core.js"></script>
+    <script src="lib/eiinfo/eiinfo.js"></script>
+    <script src="lib/eiinfo/session.js"></script>
+    <script src="lib/eiinfo/agent.js"></script>
+    <script src="lib/eiinfo/cookies.js"></script>
+
+    <!-- common -->
+    <!--<script src="js/common/sysconfigEntity.js"></script>-->
+    <script src="js/common/limitEntity.js"></script>
+    <script src="js/common/homeEntity.js"></script>
+    <script src="js/common/tagsmap.js"></script>
+
+    <!-- utils -->
+    <script src="js/utils/JPushUtil.js"></script>
+    <script src="js/utils/PostUtil.js"></script>
+    <script src="js/utils/DateUtil.js"></script>
+
+
+    <!--ion-datetime-picker-->
+    <script src="lib/ion-datetime-picker/release/ion-datetime-picker.min.js"></script>
+    <link href="lib/ion-datetime-picker/release/ion-datetime-picker.min.css" rel="stylesheet">
+
+
+
+    <!--加载ECharts-->
+    <!--script src="lib/echarts-2.2.7/echarts-all.js"></script-->
+    <!--script src="lib/echarts-2.2.7/echarts.common.min.js"></script-->
+    <script src="lib/echarts/echarts.js"></script>
+    <!--<script src="lib/cordova/cordova.js"></script>-->
+    <script src="js/models/line.js"></script>
+    <script src="js/utils/PostUtil.js"></script>
+    <script src="js/utils/EchartUtil.js"></script>
+
+    <!--加载ALARM-->
+    <script src="js/models/alarm.js"></script>
+
+    <!--加载LOGIN-->
+    <!--<script src="js/models/login.js"></script>-->
+    <!--<script src="js/models/guide.js"></script>-->
+    <script src="js/models/alarmlimit.js"></script>
+    <script src="js/models/home.js"></script>
+
+
+    <link href="lib/ionic-datepicker/dist/style.css" rel="stylesheet">
+    <!-- path to ionic/angularjs js -->
+    <script src="lib/ionic-datepicker/dist/templates.js"></script>
+    <script src="lib/ionic-datepicker/dist/ionic-datepicker.js"></script>
+
+    <!--<script src="lib/angular-datepicker-1.0.4/build/angular-datepicker.js"></script>-->
+    <!--<link rel="stylesheet" href="lib/angular-datepicker-1.0.4/build/themes/default.css"/>-->
+    <!--<link rel="stylesheet" href="lib/angular-datepicker-1.0.4/build/themes/default.date.css"/>-->
+    <!--<link rel="stylesheet" href="lib/angular-datepicker-1.0.4/build/themes/default.time.css"/>-->
+
+    <!-- your app's js -->
+    <script src="js/app.js"></script>
+    <script src="js/cordovaPlugin.js"></script>
+    <!--<script src="js/models/Sysconfig.js"></script>-->
+    <script src="js/services.js"></script>
+  </head>
+  <body ng-app="starter">
+    <!--
+      The nav bar that will be updated as we navigate between views.
+    -->
+    <ion-nav-bar class="bar-stable">
+      <ion-nav-back-button>
+      </ion-nav-back-button>
+    </ion-nav-bar>
+    <!--
+      The views will be rendered in the <ion-nav-view> directive below
+      Templates are in the /templates folder (but you could also
+      have templates inline in this html file if you'd like).
+    -->
+    <ion-nav-view></ion-nav-view>
+  </body>
+</html>

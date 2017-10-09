@@ -1,0 +1,36 @@
+<ion-view view-title="报警信息">
+  <ion-nav-buttons side="right">
+    <button  class="button button-icon ion-ios-cog-outline"  ng-model="setting"  ng-click="Setting()"></button>
+    <!--button   class="button button-icon icon ion-ios-personadd-outline" ng-model="allselect" ng-click="btLogin()"></button-->
+  </ion-nav-buttons>
+  <ion-content class="padding">
+    <div class="item item-input item-select">
+      <div class="input-label">
+        选择曲线
+      </div>
+      <select  ng-model="selectOrderState" ng-change="showSelectValue(selectOrderState)" ng-options="state.name for state in orderStates">
+      </select>
+    </div>
+    <div>
+      <ion-list>
+        <ion-toggle ng-repeat="item in setList"  ng-model="item.checked"
+                    ng-click="fcheck(item.checked)"  >
+          {{item.text}}
+        </ion-toggle>
+      </ion-list>
+    </div>
+    <ion-list ng-show="!dataMode">
+      <div class="item" ion-datetime-picker ng-model="starttime"   ng-change="fstarttime(starttime)">
+        开始时间： {{starttime| date: "yyyy-MM-dd HH:mm:ss"}}
+      </div>
+      <div class="item" ion-datetime-picker ng-model="endtime" ng-change="fendtime(endtime)">
+        结束时间： {{endtime| date: "yyyy-MM-dd HH:mm:ss"}}
+      </div>
+    </ion-list>
+
+    <button class="button button-block button-positive" ng-click="btnalarm()">
+      确定
+    </button>
+  </ion-content>
+</ion-view>
+

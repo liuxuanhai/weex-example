@@ -1,0 +1,39 @@
+<!--
+  This template loads for the 'tab.friend-detail' state (app.js)
+  'friend' is a $scope variable created in the FriendsCtrl controller (Sysconfig.js)
+  The FriendsCtrl pulls data from the Friends service (service.js)
+  The Friends service returns an array of friend data
+-->
+<ion-view view-title="{{name}}">
+  <ion-content class="padding" scroll="false" style="top: 35px;" >
+    <div class="row bar-header "  >
+      <div class="col col-28 text-center"  style="font-size: small;text-align: left;" >时间</div>
+      <div class="col col-52 text-center"  style="font-size: small;text-align: center;">字段</div>
+      <div class="col col-20 text-center"  style="font-size: small;text-align: right;">数值</div>
+      <!--div class="col col-10 text-center"  style="border: 1px solid #ddd;">上限</div>
+      <div class="col col-10 text-center"  style="border: 1px solid #ddd;">下限</div-->
+    </div>
+    <ion-content class="padding"  style="top:38px;padding: 0;" overflow-scroll="false">
+        <!--ion-refresher pulling-text="下拉刷新" on-refresh="frefresh()"></ion-refresher-->
+        <!--div class="row" ng-repeat="row in rows" ng-model="aaa" ng-click="fshowechart(row)"  href="#">
+        <div class="col col-35 text-center" style="border: 1px solid #ddd;">{{row[4]}}</div>
+        <div class="col col-35 text-center" style="padding: 0;border: 1px solid #ddd;">{{row[2]}}</div>
+        <div class="col col-10 text-center" style="padding: 0;border: 1px solid #ddd;">{{row[3]}}</div>
+        <div class="col col-10 text-center" style="padding: 0;border: 1px solid #ddd;">{{row[1]}}</div>
+        <div class="col col-10 text-center" style="padding: 0;border: 1px solid #ddd;">{{row[0]}}</div>
+
+        </div-->
+      <ion-list>
+        <a class="item "  ng-repeat="row in rows" ng-click="fshowechart(row)" >
+          <label style="font-size: small;position: absolute;left: 0px;width: 37%;top:5px;text-align: left;">{{row[4]}}</label>
+          <label style="font-size: small;position: absolute;left: 37%;width: 53%;top:5px;text-align: left;">{{row[2]}} </label>
+          <label style="font-size: small;position: absolute;left: 88%;width: 10%;top:5px;text-align: center;">{{row[3]}} </label>
+        </a>
+      </ion-list>
+      <div class="noMore text-center" ng-if="isMoreData" style="color: #3e6790;background-color: #8f8f8f">------加载更多------</div>
+      <!-- ion-infinite-scroll 上拉加载数据指令 distance默认1% nf-if的值为false时，就禁止执行on-infinite  -->
+      <ion-infinite-scroll ng-if="isMoreData"  on-infinite="floadMore()" immediate-check="false" distance="1%" ></ion-infinite-scroll>
+      <div class="noMore text-center" ng-if="!isMoreData" style="color: #3e6790;background-color: #8f8f8f">-----没有更多数据-----</div>
+    </ion-content>
+  </ion-content>
+</ion-view>

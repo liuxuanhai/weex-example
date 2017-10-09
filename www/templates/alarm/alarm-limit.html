@@ -1,0 +1,37 @@
+<ion-view view-title="报警设置">
+
+<ion-nav-buttons side="left">
+  <ion-checkbox class="item-icon-right" ng-model="allselect"
+                style="width:20px;background-color: transparent;border: hidden" ng-click="fsetAll()"></ion-checkbox>
+</ion-nav-buttons>
+  <!--div class="bar bar-header">
+    <button class="button button-icon icon ion-navicon"></button>
+  </div-->
+  <ion-content class="padding" scroll="false" style="top: 35px;" padding="false" >
+    <!--ion-list show-delete="data.showDelete"-->
+      <ion-list class="list" >
+        <!--div  class="row"  id="aa" ng-repeat="item in items" >
+          <div class="col col-90 text-left item-b"  style="padding: 0;border: 1px solid #ddd;">
+            <ion-checkbox ng-model="item.checked" class="item-icon-left " style="" > {{ item.name }} [{{ item.low }},{{item.up}}]</ion-checkbox>
+          </div>
+          <div class="col col-10 text-left  item-b"  style="padding: 0;border: 1px solid #ddd;" >
+            <button class="button icon-align-left ion-ios-more" style="width: 100%;height: 100%;" ng-click="fedit(item)"></button>
+          </div>
+        </div-->
+        <!--  rmbai 多控件于一行-->
+        <a class="item"  ng-repeat="item in items"
+           style="position:relative;top: 10px;height: 50px;" >
+          <!--ion-checkbox on-hold="fchanged(item)"
+                        style="background-color: transparent;border: transparent;height: 50px;position: absolute;left: 0;top:0"
+                        ng-model="item.checked"  -->
+            <ion-checkbox on-hold="fchanged(item)"
+                          style="background-color: transparent;border: transparent;height: 50px;position: absolute;left: 0;top:0"
+                          ng-model="item.checked"  >
+          {{ item.name }} [{{ item.low }},{{item.up}}]</ion-checkbox>
+          <button class="button icon-align-left ion-ios-more" ng-click="fedit(item)"
+            style="background-color: transparent ;height: 50px;width:20%;position: absolute;left: 80%;top:0;">
+            </button>
+        </a>
+    </ion-list>
+  </ion-content>
+</ion-view>
