@@ -23,7 +23,9 @@ function dataInitail(tagNames,ei,allData)
     allData[i]=new Array();
     for (var j = 0; j < datas[i].length; j++) {
       //allData[i].push([times[i][j],datas[i][j]]);
-      allData[i].push([new Date(times[i][j]),parseFloat(datas[i][j])]);
+      var itm=times[i][j];
+      itm=itm.replace(/-/g,'/');
+      allData[i].push([new Date(itm),parseFloat(datas[i][j])]);
     }
   }
 }
@@ -49,9 +51,13 @@ function dataReLoad(tagNames,ei,allData)
     //for(var si=times[i].length-SHIFT_COUNT*3;si<times[i].length;si++)
     for(var si= parseInt(times[i].length*0.8);si<times[i].length;si++)
     {
-      var idate1=new Date(times[i][si]);
+      var itm=times[i][si];
+      itm=itm.replace(/-/g,'/');
+      var idate1=new Date(itm);
       //var idate2=new Date(allData[i][allData[i].length-1][0]);
-      var idate2=allData[i][allData[i].length-1][0];
+      var itm2=allData[i][allData[i].length-1][0];
+      //itm2=itm2.replace(/-/g,'/');
+      var idate2=new Date(itm2);
       if(idate1>=idate2)
       {
         if( allData[i].length>MAX_POINT)
