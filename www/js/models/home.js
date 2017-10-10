@@ -7,7 +7,7 @@ app.controller('HomeCtrl',function($scope,$state,$stateParams,homeEntity,cordova
 
   $scope.backHome=function()
   {
-    cordovaPlugin.navigator.pop();
+               cordovaPlugin.navigator.pop();
   }
 
   $scope.$on('$ionicView.enter', function() {
