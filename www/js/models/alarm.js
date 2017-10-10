@@ -298,7 +298,7 @@ app.controller('AlarmCtrl', function($scope,$ionicBackdrop,$state,PostUtil,Tagsm
         einfoAlarm.set("start", "");
         einfoAlarm.set("end", "");
         einfoAlarm.set("index", "0");
-        einfoAlarm.set("tagname",tag.name);
+        einfoAlarm.set("tagname", tagAlarm.name);
         initAlarmData(PostUtil, $scope, einfoAlarm);
         timer = $timeout(function () {
           $scope.$broadcast('scroll.infiniteScrollComplete');
@@ -328,7 +328,7 @@ app.controller('AlarmCtrl', function($scope,$ionicBackdrop,$state,PostUtil,Tagsm
           einfoAlarm.set("start", "");
           einfoAlarm.set("end", "");
           einfoAlarm.set("index",ss.toString());
-          einfoAlarm.set("tagname",tag.name);
+          einfoAlarm.set("tagname", tagAlarm.name);
           getMoreAlarmData(PostUtil, $scope, einfoAlarm);
           console.log($scope.isMoreData + "加载更多...");
           timer = $timeout(function () {
