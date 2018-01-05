@@ -40,7 +40,7 @@ Support Android 4.1 (API 16) and iOS 7.0+.
     * `pod install`
     * Open `BXProject.xcworkspace` in Xcode
     * Click <img src="http://img1.tbcdn.cn/L1/461/1/5470b677a2f2eaaecf412cc55eeae062dbc275f9" height="16" > (`Run` button) or use default shortcut `cmd + r` in Xcode
-    * If you want to run the demo on your device, don't need to modify `CURRENT_IP` manually. ~~In `DemoDefine.h`(you can search this file by Xcode default shortcut `cmd + shift + o`), modify `CURRENT_IP` to your local IP~~
+    * If you want to run the demo on your device, you need to modify `CURRENT_IP` manually. ~~In `DemoDefine.h`(you can search this file by Xcode default shortcut `cmd + shift + o`), modify `CURRENT_IP` to your local IP~~
 * [Add an example](./examples/README.md#add-an-example)
 
 ### Android
