@@ -20,7 +20,7 @@ Support Android 4.1 (API 16) and iOS 7.0+.
 ## 第3步：运行Weex源码
 
 * Under project root
-    * `npm install`, 安装此项目依赖，如果此项目已经安装过，package.json也没有更新过，可以不用再执行
+    * `cnpm install`, 安装此项目依赖，如果此项目已经安装过，package.json也没有更新过，可以不用再执行
     * `./start`，第一运行调用此命令进行打包js bundle。如果js已经打包过且没有更新，可直接运行`npm run serve`。
     
 ### HTML5
